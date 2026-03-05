@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Dialog, Drawer,
+  Dialog,
   ButtonRoot, ButtonLabel,
   Stack,
   TextField,
@@ -25,19 +25,17 @@ export function DialogPage() {
   const [basicOpen, setBasicOpen] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [destructiveOpen, setDestructiveOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const [size, setSize] = useState<'sm' | 'md' | 'lg' | 'xl'>('md');
   const [sizeOpen, setSizeOpen] = useState(false);
-  const [drawerSide, setDrawerSide] = useState<'left' | 'right' | 'top' | 'bottom'>('right');
 
   return (
     <>
       <header className="doc-page__header">
         <p className="doc-page__eyebrow">Overlay</p>
-        <h1 className="doc-page__title">Dialog & Drawer</h1>
+        <h1 className="doc-page__title">Dialog</h1>
         <p className="doc-page__desc">
-          Accessible modal dialogs and drawers with focus trapping, scroll locking,
-          keyboard dismissal, and ARIA roles. Renders into a Portal.
+          Accessible modal dialogs with focus trapping, scroll locking, keyboard dismissal,
+          and ARIA roles. Renders into a Portal above all other content.
         </p>
       </header>
 
@@ -71,7 +69,7 @@ export function DialogPage() {
     </Stack>
   }
 >
-  <p>Are you sure you want to proceed? This will permanently delete the selected items.</p>
+  <p>Are you sure you want to proceed?</p>
 </Dialog>`}
         >
           <ButtonRoot variant="primary" onClick={() => setBasicOpen(true)}>
@@ -103,6 +101,9 @@ export function DialogPage() {
       {/* Form dialog */}
       <div className="doc-section">
         <h2 className="doc-section__title">Form Dialog</h2>
+        <p className="doc-section__desc">
+          Use a Dialog to collect input in context, keeping users focused on the task.
+        </p>
         <ComponentPreview
           code={`<Dialog
   open={open}
@@ -110,16 +111,7 @@ export function DialogPage() {
   title="Create new project"
   description="Fill in the details below to get started."
   size="md"
-  footer={
-    <Stack direction="row" gap={2} justify="flex-end">
-      <ButtonRoot variant="ghost" onClick={() => setOpen(false)}>
-        <ButtonLabel>Cancel</ButtonLabel>
-      </ButtonRoot>
-      <ButtonRoot variant="primary">
-        <ButtonLabel>Create project</ButtonLabel>
-      </ButtonRoot>
-    </Stack>
-  }
+  footer={...}
 >
   <Stack gap={4}>
     <TextField label="Project name" placeholder="My Awesome Project" required />
@@ -148,7 +140,7 @@ export function DialogPage() {
           >
             <Stack gap={4}>
               <TextField label="Project name" placeholder="My Awesome Project" required />
-              <TextField label="Repository URL" placeholder="https://github.com/..." />
+              <TextField label="Repository URL" placeholder="https://github.com/…" />
             </Stack>
           </Dialog>
         </ComponentPreview>
@@ -157,6 +149,9 @@ export function DialogPage() {
       {/* Destructive */}
       <div className="doc-section">
         <h2 className="doc-section__title">Destructive Dialog</h2>
+        <p className="doc-section__desc">
+          For irreversible actions, use an error Alert inside the dialog body and a destructive primary action.
+        </p>
         <ComponentPreview
           code={`<Dialog
   open={open}
@@ -165,10 +160,10 @@ export function DialogPage() {
   size="sm"
   footer={
     <Stack direction="row" gap={2} justify="flex-end">
-      <ButtonRoot variant="ghost" onClick={() => setOpen(false)}>
+      <ButtonRoot variant="ghost">
         <ButtonLabel>Cancel</ButtonLabel>
       </ButtonRoot>
-      <ButtonRoot variant="destructive" onClick={() => setOpen(false)}>
+      <ButtonRoot variant="destructive">
         <ButtonLabel>Delete permanently</ButtonLabel>
       </ButtonRoot>
     </Stack>
@@ -209,11 +204,11 @@ export function DialogPage() {
       <div className="doc-section">
         <h2 className="doc-section__title">Sizes</h2>
         <ComponentPreview
-          code={`<Dialog size="sm" ... />   // 400px max
-<Dialog size="md" ... />   // 560px max
-<Dialog size="lg" ... />   // 720px max
-<Dialog size="xl" ... />   // 900px max
-<Dialog size="full" ... /> // Full screen`}
+          code={`<Dialog size="sm" />   // 400px max
+<Dialog size="md" />   // 560px max  (default)
+<Dialog size="lg" />   // 720px max
+<Dialog size="xl" />   // 900px max
+<Dialog size="full" /> // Full screen`}
           controls={
             <DemoControl
               label="Size"
@@ -241,79 +236,15 @@ export function DialogPage() {
             }
           >
             <p style={{ margin: 0, color: 'var(--synu-text-secondary)', fontSize: 'var(--synu-font-size-sm)' }}>
-              This dialog has <strong>{size}</strong> size constraint applied. Resize your window to see how it adapts.
+              This dialog has the <strong>{size}</strong> size applied. Resize your window to see how it adapts on smaller viewports.
             </p>
           </Dialog>
         </ComponentPreview>
       </div>
 
-      {/* Drawer */}
-      <div className="doc-section">
-        <h2 className="doc-section__title">Drawer</h2>
-        <p className="doc-section__desc">
-          A panel that slides in from any edge. Same accessibility features as Dialog.
-        </p>
-        <ComponentPreview
-          code={`<Drawer
-  open={open}
-  onClose={() => setOpen(false)}
-  side="right"
-  title="Filters"
-  footer={
-    <Stack direction="row" gap={2}>
-      <ButtonRoot variant="ghost" fullWidth>
-        <ButtonLabel>Reset</ButtonLabel>
-      </ButtonRoot>
-      <ButtonRoot variant="primary" fullWidth>
-        <ButtonLabel>Apply</ButtonLabel>
-      </ButtonRoot>
-    </Stack>
-  }
->
-  <Stack gap={4}>
-    <TextField label="Search" placeholder="Filter by name…" />
-    <Select label="Status" options={[...]} />
-  </Stack>
-</Drawer>`}
-          controls={
-            <DemoControl
-              label="Side"
-              options={['left', 'right', 'top', 'bottom']}
-              value={drawerSide}
-              onChange={(v) => setDrawerSide(v as typeof drawerSide)}
-            />
-          }
-        >
-          <ButtonRoot variant="secondary" onClick={() => setDrawerOpen(true)}>
-            <ButtonLabel>Open {drawerSide} Drawer</ButtonLabel>
-          </ButtonRoot>
-          <Drawer
-            open={drawerOpen}
-            onClose={() => setDrawerOpen(false)}
-            side={drawerSide}
-            title="Filters"
-            footer={
-              <Stack direction="row" gap={2}>
-                <ButtonRoot variant="ghost" fullWidth onClick={() => setDrawerOpen(false)}>
-                  <ButtonLabel>Reset</ButtonLabel>
-                </ButtonRoot>
-                <ButtonRoot variant="primary" fullWidth onClick={() => setDrawerOpen(false)}>
-                  <ButtonLabel>Apply</ButtonLabel>
-                </ButtonRoot>
-              </Stack>
-            }
-          >
-            <Stack gap={4}>
-              <TextField label="Search" placeholder="Filter by name…" />
-              <TextField label="Date range" placeholder="Select date…" />
-            </Stack>
-          </Drawer>
-        </ComponentPreview>
-      </div>
-
       {/* Props */}
       <div className="doc-section">
-        <h2 className="doc-section__title">Props — Dialog</h2>
+        <h2 className="doc-section__title">Props</h2>
         <PropsTable props={dialogProps} />
       </div>
     </>

@@ -42,8 +42,10 @@ export const navigation: NavSection[] = [
       { label: 'Checkbox', path: '/docs/checkbox' },
       { label: 'Radio', path: '/docs/radio' },
       { label: 'Select', path: '/docs/select' },
-      { label: 'Switch', path: '/docs/switch' },
       { label: 'Slider', path: '/docs/slider' },
+      { label: 'Switch', path: '/docs/switch' },
+      { label: 'Search Field', path: '/docs/search-field' },
+      { label: 'Toggle Button', path: '/docs/toggle' },
     ],
   },
   {
@@ -51,6 +53,7 @@ export const navigation: NavSection[] = [
     items: [
       { label: 'Alert', path: '/docs/alert' },
       { label: 'Progress', path: '/docs/progress' },
+      { label: 'Circular Progress', path: '/docs/circular-progress' },
       { label: 'Snackbar', path: '/docs/snackbar' },
     ],
   },
@@ -60,22 +63,50 @@ export const navigation: NavSection[] = [
       { label: 'Breadcrumbs', path: '/docs/breadcrumbs' },
       { label: 'Tabs', path: '/docs/tabs' },
       { label: 'Menu', path: '/docs/menu' },
+      { label: 'Stepper', path: '/docs/stepper' },
+      { label: 'Bottom Navigation', path: '/docs/bottom-nav' },
+      { label: 'Navigation Rail', path: '/docs/nav-rail' },
+      { label: 'App Bar', path: '/docs/app-bar' },
     ],
   },
   {
     section: 'Overlay',
     items: [
       { label: 'Dialog', path: '/docs/dialog' },
+      { label: 'Confirm Dialog', path: '/docs/confirm-dialog' },
       { label: 'Drawer', path: '/docs/drawer' },
       { label: 'Tooltip', path: '/docs/tooltip' },
       { label: 'Popover', path: '/docs/popover' },
+      { label: 'Hover Card', path: '/docs/hover-card' },
+      { label: 'Context Menu', path: '/docs/context-menu' },
+      { label: 'Dropdown', path: '/docs/dropdown' },
+      { label: 'Command Palette', path: '/docs/command-palette' },
     ],
   },
   {
-    section: 'Interactive',
+    section: 'Data Display',
     items: [
       { label: 'Accordion', path: '/docs/accordion' },
       { label: 'Table', path: '/docs/table' },
+      { label: 'Pagination', path: '/docs/pagination' },
+      { label: 'Timeline', path: '/docs/timeline' },
+      { label: 'Tree View', path: '/docs/treeview' },
+      { label: 'Statistic', path: '/docs/statistic' },
+      { label: 'Empty State', path: '/docs/emptystate' },
+      { label: 'Result', path: '/docs/result' },
+    ],
+  },
+  {
+    section: 'Charts',
+    items: [
+      { label: 'Charts', path: '/docs/charts' },
+    ],
+  },
+  {
+    section: 'Performance',
+    items: [
+      { label: 'Virtualized List', path: '/docs/virtual-list' },
+      { label: 'Infinite Scroll', path: '/docs/infinite-scroll' },
     ],
   },
 ];

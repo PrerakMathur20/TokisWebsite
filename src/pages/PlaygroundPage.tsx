@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   ButtonRoot, ButtonLabel, ButtonIcon,
   TextField, Textarea,
@@ -10,7 +10,16 @@ import {
   Card, CardHeader, CardBody, CardTitle, CardDescription,
   Tabs,
   Stack,
+  Tooltip,
+  useSnackbar, SnackbarContainer,
+  Rating,
+  OtpInput,
+  FileDropZone,
+  Accordion,
+  CodeBlock,
 } from '@synu/react';
+
+// ─── Icons ───────────────────────────────────────────────────
 
 const PlusIcon = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -25,13 +34,21 @@ const SaveIcon = () => (
   </svg>
 );
 
-type Section = 'buttons' | 'forms' | 'display' | 'feedback';
+const BellIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+    <path d="M7 1.5a4 4 0 0 1 4 4v2.5l1 2H2l1-2V5.5a4 4 0 0 1 4-4zM5.5 11.5a1.5 1.5 0 0 0 3 0" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
-const sections: { id: Section; label: string }[] = [
-  { id: 'buttons', label: 'Buttons' },
-  { id: 'forms', label: 'Forms' },
-  { id: 'display', label: 'Display' },
-  { id: 'feedback', label: 'Feedback' },
+type Section = 'buttons' | 'forms' | 'display' | 'feedback' | 'overlays' | 'inputs+';
+
+const sections: { id: Section; label: string; emoji: string }[] = [
+  { id: 'buttons', label: 'Buttons', emoji: '🎛' },
+  { id: 'forms', label: 'Forms', emoji: '📋' },
+  { id: 'display', label: 'Display', emoji: '🎨' },
+  { id: 'feedback', label: 'Feedback', emoji: '💬' },
+  { id: 'overlays', label: 'Overlays', emoji: '🪟' },
+  { id: 'inputs+', label: 'Inputs+', emoji: '⚡' },
 ];
 
 export function PlaygroundPage() {
@@ -43,23 +60,38 @@ export function PlaygroundPage() {
   const [btnLoading, setBtnLoading] = useState(false);
   const [btnDisabled, setBtnDisabled] = useState(false);
   const [btnFullWidth, setBtnFullWidth] = useState(false);
+  const [btnIcon, setBtnIcon] = useState(true);
 
   // Form state
   const [textValue, setTextValue] = useState('');
+  const [textareaValue, setTextareaValue] = useState('');
   const [selectValue, setSelectValue] = useState('react');
   const [sliderValue, setSliderValue] = useState(50);
   const [switchOn, setSwitchOn] = useState(false);
   const [checked, setChecked] = useState(false);
   const [radioValue, setRadioValue] = useState('option-a');
+  const [textError, setTextError] = useState(false);
 
   // Display state
   const [avatarSize, setAvatarSize] = useState<'xs' | 'sm' | 'md' | 'lg' | 'xl'>('md');
   const [badgeVariant, setBadgeVariant] = useState<'default' | 'primary' | 'success' | 'warning' | 'error' | 'info'>('primary');
+  const [badgeDot, setBadgeDot] = useState(false);
   const [activeChips, setActiveChips] = useState<Set<string>>(new Set(['design']));
+  const [ratingValue, setRatingValue] = useState(3);
 
   // Feedback state
   const [alertVariant, setAlertVariant] = useState<'info' | 'success' | 'warning' | 'error'>('info');
   const [progressValue, setProgressValue] = useState(65);
+  const [progressVariant, setProgressVariant] = useState<'default' | 'success' | 'warning' | 'error'>('default');
+
+  // Overlays
+  const [tooltipPlacement, setTooltipPlacement] = useState<'top' | 'bottom' | 'left' | 'right'>('top');
+
+  // Inputs+
+  const [otpValue, setOtpValue] = useState('');
+  const [otpError, setOtpError] = useState(false);
+
+  const { items: snackItems, add: addSnack, dismiss } = useSnackbar();
 
   const toggleChip = (chip: string) => {
     setActiveChips((prev) => {
@@ -70,8 +102,28 @@ export function PlaygroundPage() {
     });
   };
 
+  const fireSnack = (variant: 'default' | 'success' | 'error' | 'warning') => {
+    const messages: Record<string, { title: string; message: string }> = {
+      default: { title: 'Info', message: 'This is a notification message.' },
+      success: { title: 'Success!', message: 'Your changes were saved successfully.' },
+      error: { title: 'Error', message: 'Something went wrong. Please try again.' },
+      warning: { title: 'Warning', message: 'API rate limit is at 80%.' },
+    };
+    addSnack({ ...messages[variant], variant });
+  };
+
+  // Generate live code snippet for button
+  const buttonCode = `<ButtonRoot
+  variant="${btnVariant}"
+  size="${btnSize}"${btnLoading ? '\n  loading' : ''}${btnDisabled ? '\n  disabled' : ''}${btnFullWidth ? '\n  fullWidth' : ''}
+>
+${btnIcon ? '  <ButtonIcon><SaveIcon /></ButtonIcon>\n' : ''}  <ButtonLabel>Save changes</ButtonLabel>
+</ButtonRoot>`;
+
   return (
     <div className="playground">
+      <SnackbarContainer items={snackItems} onDismiss={dismiss} />
+
       <header className="playground__header">
         <h1 className="playground__title">Component Playground</h1>
         <p className="playground__subtitle">
@@ -92,36 +144,55 @@ export function PlaygroundPage() {
       </nav>
 
       <div className="playground__content">
+
         {/* ── Buttons ── */}
         {section === 'buttons' && (
           <div className="playground__section">
             <div className="playground__preview">
               <div className="playground__preview-canvas">
-                <ButtonRoot
-                  variant={btnVariant}
-                  size={btnSize}
-                  loading={btnLoading}
-                  disabled={btnDisabled}
-                  fullWidth={btnFullWidth}
-                >
-                  <ButtonIcon><SaveIcon /></ButtonIcon>
-                  <ButtonLabel>Save changes</ButtonLabel>
-                </ButtonRoot>
+                <Stack gap={4} align="center">
+                  <ButtonRoot
+                    variant={btnVariant}
+                    size={btnSize}
+                    loading={btnLoading}
+                    disabled={btnDisabled}
+                    fullWidth={btnFullWidth}
+                    style={btnFullWidth ? { width: '100%', maxWidth: 300 } : undefined}
+                  >
+                    {btnIcon && <ButtonIcon><SaveIcon /></ButtonIcon>}
+                    <ButtonLabel>Save changes</ButtonLabel>
+                  </ButtonRoot>
+
+                  {/* All variants at once */}
+                  <div style={{ borderTop: '1px solid var(--synu-color-border)', paddingTop: 'var(--synu-spacing-4)', width: '100%' }}>
+                    <p style={{ fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', textAlign: 'center', margin: '0 0 var(--synu-spacing-3)' }}>
+                      All variants at current size
+                    </p>
+                    <Stack direction="row" gap={2} wrap justify="center">
+                      {(['primary', 'secondary', 'ghost', 'outline', 'destructive', 'link'] as const).map((v) => (
+                        <ButtonRoot key={v} variant={v} size={btnSize}>
+                          <ButtonLabel>{v}</ButtonLabel>
+                        </ButtonRoot>
+                      ))}
+                    </Stack>
+                  </div>
+                </Stack>
+              </div>
+
+              {/* Live code preview */}
+              <div className="playground__code-preview">
+                <CodeBlock code={buttonCode} language="tsx" filename="Live code" theme="dark" />
               </div>
             </div>
 
             <div className="playground__controls">
-              <h2 className="playground__controls-title">ButtonRoot</h2>
+              <h2 className="playground__controls-title">Button</h2>
 
               <div className="playground__control-group">
                 <label className="playground__control-label">Variant</label>
                 <div className="playground__control-options">
                   {(['primary', 'secondary', 'ghost', 'outline', 'destructive', 'link'] as const).map((v) => (
-                    <button
-                      key={v}
-                      className={`demo-option${btnVariant === v ? ' demo-option--active' : ''}`}
-                      onClick={() => setBtnVariant(v)}
-                    >
+                    <button key={v} className={`demo-option${btnVariant === v ? ' demo-option--active' : ''}`} onClick={() => setBtnVariant(v)}>
                       {v}
                     </button>
                   ))}
@@ -132,11 +203,7 @@ export function PlaygroundPage() {
                 <label className="playground__control-label">Size</label>
                 <div className="playground__control-options">
                   {(['sm', 'md', 'lg', 'xl'] as const).map((v) => (
-                    <button
-                      key={v}
-                      className={`demo-option${btnSize === v ? ' demo-option--active' : ''}`}
-                      onClick={() => setBtnSize(v)}
-                    >
+                    <button key={v} className={`demo-option${btnSize === v ? ' demo-option--active' : ''}`} onClick={() => setBtnSize(v)}>
                       {v}
                     </button>
                   ))}
@@ -149,17 +216,7 @@ export function PlaygroundPage() {
                   <Switch label="Loading" checked={btnLoading} onChange={setBtnLoading} size="sm" />
                   <Switch label="Disabled" checked={btnDisabled} onChange={setBtnDisabled} size="sm" />
                   <Switch label="Full Width" checked={btnFullWidth} onChange={setBtnFullWidth} size="sm" />
-                </Stack>
-              </div>
-
-              <div className="playground__control-group">
-                <label className="playground__control-label">All Variants</label>
-                <Stack gap={2} wrap>
-                  {(['primary', 'secondary', 'ghost', 'outline', 'destructive', 'link'] as const).map((v) => (
-                    <ButtonRoot key={v} variant={v} size="sm">
-                      <ButtonLabel>{v}</ButtonLabel>
-                    </ButtonRoot>
-                  ))}
+                  <Switch label="Show Icon" checked={btnIcon} onChange={setBtnIcon} size="sm" />
                 </Stack>
               </div>
             </div>
@@ -170,14 +227,15 @@ export function PlaygroundPage() {
         {section === 'forms' && (
           <div className="playground__section">
             <div className="playground__preview">
-              <div className="playground__preview-canvas" style={{ flexDirection: 'column', alignItems: 'stretch', maxWidth: 420 }}>
-                <Stack gap={4}>
+              <div className="playground__preview-canvas" style={{ flexDirection: 'column', alignItems: 'stretch', maxWidth: 440 }}>
+                <Stack gap={5}>
                   <TextField
                     label="Project name"
                     placeholder="my-awesome-app"
                     value={textValue}
                     onChange={(e) => setTextValue(e.target.value)}
-                    helperText={textValue.length > 0 ? `${textValue.length} characters` : 'Give your project a unique name.'}
+                    error={textError}
+                    helperText={textError ? 'Project name is required.' : textValue.length > 0 ? `${textValue.length} chars` : 'Give your project a unique name.'}
                   />
                   <Select
                     label="Framework"
@@ -191,12 +249,17 @@ export function PlaygroundPage() {
                       { value: 'angular', label: 'Angular' },
                     ]}
                   />
-                  <Slider label="Replicas" value={sliderValue} min={1} max={10} step={1} showValue onChange={setSliderValue} />
-                  <Stack gap={2}>
-                    <Checkbox label="Enable auto-scaling" checked={checked} onChange={setChecked} description="Automatically adjust replicas based on load." />
+                  <Slider label="Replicas" value={sliderValue} min={1} max={20} step={1} showValue onChange={setSliderValue} />
+                  <Stack gap={3}>
+                    <Checkbox
+                      label="Enable auto-scaling"
+                      description="Automatically adjust replicas based on load."
+                      checked={checked}
+                      onChange={setChecked}
+                    />
                     <Switch label="Dark mode preview" checked={switchOn} onChange={setSwitchOn} />
                   </Stack>
-                  <RadioGroup label="Region" name="region" value={radioValue} onChange={setRadioValue}>
+                  <RadioGroup label="Region" name="pg-region" value={radioValue} onChange={setRadioValue}>
                     <Radio value="option-a" label="US East" description="Lowest latency for US users." />
                     <Radio value="option-b" label="EU West" description="GDPR compliant region." />
                     <Radio value="option-c" label="AP South" description="Closest to Asia Pacific users." />
@@ -207,13 +270,28 @@ export function PlaygroundPage() {
 
             <div className="playground__controls">
               <h2 className="playground__controls-title">Form Controls</h2>
-              <p style={{ fontSize: 'var(--synu-font-size-sm)', color: 'var(--synu-text-secondary)', margin: 0 }}>
-                All form controls support controlled and uncontrolled usage, error states, and accessibility attributes.
-                Interact with the form on the left to see live updates.
-              </p>
+
               <div className="playground__control-group">
-                <label className="playground__control-label">Current values</label>
-                <div style={{ fontSize: 'var(--synu-font-size-sm)', fontFamily: 'var(--synu-font-family-mono)', background: 'var(--synu-color-surface)', borderRadius: 'var(--synu-radius-md)', padding: 'var(--synu-spacing-3)', lineHeight: 1.8 }}>
+                <label className="playground__control-label">TextField State</label>
+                <Switch label="Error state" checked={textError} onChange={setTextError} size="sm" />
+              </div>
+
+              <div className="playground__control-group">
+                <label className="playground__control-label">Slider value: {sliderValue}</label>
+                <input
+                  type="range" min={1} max={20} value={sliderValue}
+                  onChange={(e) => setSliderValue(Number(e.target.value))}
+                  style={{ width: '100%', accentColor: 'var(--synu-color-primary)' }}
+                />
+              </div>
+
+              <div className="playground__control-group">
+                <label className="playground__control-label">Live values</label>
+                <div style={{
+                  fontSize: 'var(--synu-font-size-xs)', fontFamily: 'var(--synu-font-family-mono)',
+                  background: 'var(--synu-color-background)', border: '1px solid var(--synu-color-border)',
+                  borderRadius: 'var(--synu-radius-md)', padding: 'var(--synu-spacing-3)', lineHeight: 2,
+                }}>
                   <div><span style={{ color: 'var(--synu-text-tertiary)' }}>name:</span> {textValue || '—'}</div>
                   <div><span style={{ color: 'var(--synu-text-tertiary)' }}>framework:</span> {selectValue}</div>
                   <div><span style={{ color: 'var(--synu-text-tertiary)' }}>replicas:</span> {sliderValue}</div>
@@ -231,17 +309,28 @@ export function PlaygroundPage() {
           <div className="playground__section">
             <div className="playground__preview">
               <div className="playground__preview-canvas" style={{ flexDirection: 'column', gap: 'var(--synu-spacing-6)' }}>
+                {/* Avatar */}
                 <Stack direction="row" gap={4} align="center">
                   <Avatar name="Alex Kim" size={avatarSize} />
                   <Stack gap={1}>
                     <span style={{ fontWeight: 'var(--synu-font-weight-semibold)', fontSize: 'var(--synu-font-size-sm)' }}>Alex Kim</span>
                     <Stack direction="row" gap={1}>
-                      <Badge variant={badgeVariant}>Admin</Badge>
+                      <Badge variant={badgeVariant} dot={badgeDot}>Admin</Badge>
                       <Badge variant="success" dot>Online</Badge>
                     </Stack>
                   </Stack>
                 </Stack>
 
+                {/* Avatar sizes */}
+                <Stack direction="row" gap={2} align="center">
+                  {(['xs', 'sm', 'md', 'lg', 'xl'] as const).map((s) => (
+                    <Tooltip key={s} content={s} placement="top">
+                      <Avatar name={`${s} size`} size={s} />
+                    </Tooltip>
+                  ))}
+                </Stack>
+
+                {/* Chips */}
                 <Stack direction="row" gap={2} wrap>
                   {['design', 'engineering', 'product', 'marketing', 'data'].map((chip) => (
                     <Chip key={chip} selected={activeChips.has(chip)} onClick={() => toggleChip(chip)}>
@@ -250,22 +339,16 @@ export function PlaygroundPage() {
                   ))}
                 </Stack>
 
-                <Card variant="elevated" style={{ width: '100%', maxWidth: 340 }}>
-                  <CardHeader>
-                    <Stack direction="row" justify="space-between" align="center">
-                      <CardTitle>API Usage</CardTitle>
-                      <Badge variant="info">Live</Badge>
-                    </Stack>
-                    <CardDescription>Last 30 days</CardDescription>
-                  </CardHeader>
-                  <CardBody>
-                    <Stack gap={2}>
-                      <Progress value={72} variant="default" showValue label="Requests" />
-                      <Progress value={38} variant="success" showValue label="Cache hits" />
-                      <Progress value={91} variant="warning" showValue label="Rate limit" />
-                    </Stack>
-                  </CardBody>
-                </Card>
+                {/* Rating */}
+                <Stack gap={1}>
+                  <span style={{ fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', fontWeight: 'var(--synu-font-weight-medium)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Rating
+                  </span>
+                  <Stack direction="row" gap={3} align="center">
+                    <Rating value={ratingValue} onChange={setRatingValue} size="lg" />
+                    <Badge variant="warning">{ratingValue} / 5</Badge>
+                  </Stack>
+                </Stack>
               </div>
             </div>
 
@@ -276,11 +359,7 @@ export function PlaygroundPage() {
                 <label className="playground__control-label">Avatar Size</label>
                 <div className="playground__control-options">
                   {(['xs', 'sm', 'md', 'lg', 'xl'] as const).map((v) => (
-                    <button
-                      key={v}
-                      className={`demo-option${avatarSize === v ? ' demo-option--active' : ''}`}
-                      onClick={() => setAvatarSize(v)}
-                    >
+                    <button key={v} className={`demo-option${avatarSize === v ? ' demo-option--active' : ''}`} onClick={() => setAvatarSize(v)}>
                       {v}
                     </button>
                   ))}
@@ -291,11 +370,7 @@ export function PlaygroundPage() {
                 <label className="playground__control-label">Badge Variant</label>
                 <div className="playground__control-options">
                   {(['default', 'primary', 'success', 'warning', 'error', 'info'] as const).map((v) => (
-                    <button
-                      key={v}
-                      className={`demo-option${badgeVariant === v ? ' demo-option--active' : ''}`}
-                      onClick={() => setBadgeVariant(v)}
-                    >
+                    <button key={v} className={`demo-option${badgeVariant === v ? ' demo-option--active' : ''}`} onClick={() => setBadgeVariant(v)}>
                       {v}
                     </button>
                   ))}
@@ -303,12 +378,22 @@ export function PlaygroundPage() {
               </div>
 
               <div className="playground__control-group">
-                <label className="playground__control-label">Chips</label>
-                <p style={{ fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', margin: 0 }}>
-                  Click chips on the left to toggle selection.
-                </p>
-                <div style={{ fontSize: 'var(--synu-font-size-sm)', fontFamily: 'var(--synu-font-family-mono)', marginTop: 8 }}>
-                  selected: [{Array.from(activeChips).join(', ')}]
+                <Switch label="Badge dot mode" checked={badgeDot} onChange={setBadgeDot} size="sm" />
+              </div>
+
+              <div className="playground__control-group">
+                <label className="playground__control-label">Star Rating: {ratingValue}/5</label>
+                <input
+                  type="range" min={0} max={5} step={1} value={ratingValue}
+                  onChange={(e) => setRatingValue(Number(e.target.value))}
+                  style={{ width: '100%', accentColor: 'var(--synu-color-warning)' }}
+                />
+              </div>
+
+              <div className="playground__control-group">
+                <label className="playground__control-label">Selected chips</label>
+                <div style={{ fontSize: 'var(--synu-font-size-xs)', fontFamily: 'var(--synu-font-family-mono)', color: 'var(--synu-text-secondary)' }}>
+                  [{Array.from(activeChips).join(', ')}]
                 </div>
               </div>
             </div>
@@ -319,35 +404,48 @@ export function PlaygroundPage() {
         {section === 'feedback' && (
           <div className="playground__section">
             <div className="playground__preview">
-              <div className="playground__preview-canvas" style={{ flexDirection: 'column', gap: 'var(--synu-spacing-4)', alignItems: 'stretch', maxWidth: 440 }}>
+              <div className="playground__preview-canvas" style={{ flexDirection: 'column', gap: 'var(--synu-spacing-5)', alignItems: 'stretch', maxWidth: 460 }}>
                 <Alert variant={alertVariant} title={alertVariant.charAt(0).toUpperCase() + alertVariant.slice(1)}>
                   {alertVariant === 'info' && 'Your deployment is being processed. This may take a few moments.'}
                   {alertVariant === 'success' && 'All 142 tests passed. Your build is ready to deploy.'}
                   {alertVariant === 'warning' && 'API rate limit is at 80%. Consider upgrading your plan.'}
-                  {alertVariant === 'error' && 'Build failed. Check the logs for more information.'}
+                  {alertVariant === 'error' && 'Build failed. Check the error logs for more information.'}
                 </Alert>
 
                 <Stack gap={3}>
                   <Stack direction="row" justify="space-between" align="center">
-                    <span style={{ fontSize: 'var(--synu-font-size-sm)', color: 'var(--synu-text-secondary)' }}>Upload</span>
+                    <span style={{ fontSize: 'var(--synu-font-size-sm)', color: 'var(--synu-text-secondary)' }}>Upload progress</span>
                     <span style={{ fontSize: 'var(--synu-font-size-xs)', fontFamily: 'var(--synu-font-family-mono)', color: 'var(--synu-text-tertiary)' }}>{progressValue}%</span>
                   </Stack>
-                  <Progress value={progressValue} label="Upload" />
+                  <Progress value={progressValue} variant={progressVariant} label="Upload" />
                   <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={progressValue}
+                    type="range" min={0} max={100} value={progressValue}
                     onChange={(e) => setProgressValue(Number(e.target.value))}
                     style={{ width: '100%', accentColor: 'var(--synu-color-primary)', cursor: 'pointer' }}
                   />
                 </Stack>
 
-                <Stack direction="row" gap={4} align="center">
-                  <Spinner size="sm" />
-                  <Spinner size="md" />
-                  <Spinner size="lg" />
-                  <Spinner size="xl" />
+                <Stack direction="row" gap={4} align="center" justify="center">
+                  {(['sm', 'md', 'lg', 'xl'] as const).map((s) => (
+                    <Stack key={s} gap={1} align="center">
+                      <Spinner size={s} />
+                      <span style={{ fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)' }}>{s}</span>
+                    </Stack>
+                  ))}
+                </Stack>
+
+                {/* Snackbar triggers */}
+                <Stack gap={2}>
+                  <p style={{ margin: 0, fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>
+                    Snackbar
+                  </p>
+                  <Stack direction="row" gap={2} wrap>
+                    {(['default', 'success', 'error', 'warning'] as const).map((v) => (
+                      <ButtonRoot key={v} size="sm" variant={v === 'default' ? 'secondary' : v === 'error' ? 'destructive' : 'outline'} onClick={() => fireSnack(v)}>
+                        <ButtonLabel>{v}</ButtonLabel>
+                      </ButtonRoot>
+                    ))}
+                  </Stack>
                 </Stack>
               </div>
             </div>
@@ -359,11 +457,7 @@ export function PlaygroundPage() {
                 <label className="playground__control-label">Alert Variant</label>
                 <div className="playground__control-options">
                   {(['info', 'success', 'warning', 'error'] as const).map((v) => (
-                    <button
-                      key={v}
-                      className={`demo-option${alertVariant === v ? ' demo-option--active' : ''}`}
-                      onClick={() => setAlertVariant(v)}
-                    >
+                    <button key={v} className={`demo-option${alertVariant === v ? ' demo-option--active' : ''}`} onClick={() => setAlertVariant(v)}>
                       {v}
                     </button>
                   ))}
@@ -371,14 +465,220 @@ export function PlaygroundPage() {
               </div>
 
               <div className="playground__control-group">
-                <label className="playground__control-label">Progress</label>
-                <p style={{ fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', margin: 0 }}>
-                  Drag the slider on the left to control the progress bar value.
+                <label className="playground__control-label">Progress Variant</label>
+                <div className="playground__control-options">
+                  {(['default', 'success', 'warning', 'error'] as const).map((v) => (
+                    <button key={v} className={`demo-option${progressVariant === v ? ' demo-option--active' : ''}`} onClick={() => setProgressVariant(v)}>
+                      {v}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="playground__control-group">
+                <label className="playground__control-label">Progress: {progressValue}%</label>
+                <input
+                  type="range" min={0} max={100} value={progressValue}
+                  onChange={(e) => setProgressValue(Number(e.target.value))}
+                  style={{ width: '100%', accentColor: 'var(--synu-color-primary)' }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Overlays ── */}
+        {section === 'overlays' && (
+          <div className="playground__section">
+            <div className="playground__preview">
+              <div className="playground__preview-canvas" style={{ flexDirection: 'column', gap: 'var(--synu-spacing-8)' }}>
+                {/* Tooltip */}
+                <Stack gap={2} align="center">
+                  <p style={{ margin: 0, fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Tooltip — {tooltipPlacement}
+                  </p>
+                  <div style={{ padding: 30 }}>
+                    <Tooltip content="This is a tooltip" placement={tooltipPlacement}>
+                      <ButtonRoot variant="outline">
+                        <ButtonLabel>Hover or focus me</ButtonLabel>
+                      </ButtonRoot>
+                    </Tooltip>
+                  </div>
+                </Stack>
+
+                {/* Accordion */}
+                <Stack gap={2} style={{ width: '100%', maxWidth: 420 }}>
+                  <p style={{ margin: 0, fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Accordion
+                  </p>
+                  <Accordion
+                    type="single"
+                    collapsible
+                    items={[
+                      {
+                        value: 'a1',
+                        trigger: 'What is Synu?',
+                        content: <p style={{ margin: 0, fontSize: 'var(--synu-font-size-sm)', color: 'var(--synu-text-secondary)', lineHeight: 1.6 }}>Synu is a performance-first, token-native design system for React. Zero runtime styling, fully accessible.</p>,
+                      },
+                      {
+                        value: 'a2',
+                        trigger: 'Is it open source?',
+                        content: <p style={{ margin: 0, fontSize: 'var(--synu-font-size-sm)', color: 'var(--synu-text-secondary)', lineHeight: 1.6 }}>Yes! Synu is MIT licensed and free to use in personal and commercial projects.</p>,
+                      },
+                      {
+                        value: 'a3',
+                        trigger: 'Does it support dark mode?',
+                        content: <p style={{ margin: 0, fontSize: 'var(--synu-font-size-sm)', color: 'var(--synu-text-secondary)', lineHeight: 1.6 }}>Absolutely. Dark mode is baked in via CSS variables — instant switching, no flicker, system preference support.</p>,
+                      },
+                    ]}
+                  />
+                </Stack>
+
+                {/* Tabs */}
+                <Stack gap={2} style={{ width: '100%', maxWidth: 420 }}>
+                  <p style={{ margin: 0, fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Tabs
+                  </p>
+                  <Tabs
+                    tabs={[
+                      { value: 'tab1', label: 'Overview', content: <p style={{ margin: 'var(--synu-spacing-4) 0', fontSize: 'var(--synu-font-size-sm)', color: 'var(--synu-text-secondary)' }}>Tab content for Overview panel.</p> },
+                      { value: 'tab2', label: 'Settings', content: <p style={{ margin: 'var(--synu-spacing-4) 0', fontSize: 'var(--synu-font-size-sm)', color: 'var(--synu-text-secondary)' }}>Tab content for Settings panel.</p> },
+                      { value: 'tab3', label: 'Advanced', content: <p style={{ margin: 'var(--synu-spacing-4) 0', fontSize: 'var(--synu-font-size-sm)', color: 'var(--synu-text-secondary)' }}>Tab content for Advanced panel.</p> },
+                    ]}
+                  />
+                </Stack>
+              </div>
+            </div>
+
+            <div className="playground__controls">
+              <h2 className="playground__controls-title">Overlays & Interactive</h2>
+
+              <div className="playground__control-group">
+                <label className="playground__control-label">Tooltip Placement</label>
+                <div className="playground__control-options">
+                  {(['top', 'bottom', 'left', 'right'] as const).map((v) => (
+                    <button key={v} className={`demo-option${tooltipPlacement === v ? ' demo-option--active' : ''}`} onClick={() => setTooltipPlacement(v)}>
+                      {v}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="playground__control-group">
+                <p style={{ fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', margin: 0, lineHeight: 1.6 }}>
+                  The Accordion and Tabs above are fully interactive — click to expand/collapse or switch tabs.
                 </p>
               </div>
             </div>
           </div>
         )}
+
+        {/* ── Inputs+ ── */}
+        {section === 'inputs+' && (
+          <div className="playground__section">
+            <div className="playground__preview">
+              <div className="playground__preview-canvas" style={{ flexDirection: 'column', gap: 'var(--synu-spacing-8)', alignItems: 'stretch', maxWidth: 480 }}>
+                {/* OTP */}
+                <Stack gap={3}>
+                  <p style={{ margin: 0, fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    OTP Input
+                  </p>
+                  <OtpInput
+                    length={6}
+                    value={otpValue}
+                    onChange={setOtpValue}
+                    error={otpError}
+                    label="Verification code"
+                  />
+                  <Stack direction="row" gap={2}>
+                    <ButtonRoot
+                      size="sm"
+                      variant={otpValue.length === 6 ? 'primary' : 'outline'}
+                      onClick={() => {
+                        if (otpValue.length !== 6) { setOtpError(true); return; }
+                        setOtpError(false);
+                        addSnack({ title: 'Verified!', message: `Code "${otpValue}" accepted.`, variant: 'success' });
+                        setOtpValue('');
+                      }}
+                    >
+                      <ButtonLabel>Verify</ButtonLabel>
+                    </ButtonRoot>
+                    <ButtonRoot size="sm" variant="ghost" onClick={() => { setOtpValue(''); setOtpError(false); }}>
+                      <ButtonLabel>Clear</ButtonLabel>
+                    </ButtonRoot>
+                  </Stack>
+                  {otpError && (
+                    <p style={{ margin: 0, fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-color-error)' }}>
+                      Please enter all 6 digits.
+                    </p>
+                  )}
+                  {otpValue.length > 0 && (
+                    <p style={{ margin: 0, fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', fontFamily: 'var(--synu-font-family-mono)' }}>
+                      Current: {otpValue} ({otpValue.length}/6)
+                    </p>
+                  )}
+                </Stack>
+
+                {/* File Drop Zone */}
+                <Stack gap={3}>
+                  <p style={{ margin: 0, fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    File Drop Zone
+                  </p>
+                  <FileDropZone
+                    label="Drop files here, or click to browse"
+                    hint="PNG, JPG, PDF up to 5MB"
+                    accept="image/*,.pdf"
+                    multiple
+                    maxSize={5 * 1024 * 1024}
+                    onFiles={(files) => addSnack({
+                      title: 'Files ready',
+                      message: `${files.length} file${files.length !== 1 ? 's' : ''} selected.`,
+                      variant: 'success',
+                    })}
+                  />
+                </Stack>
+
+                {/* Color-coded badges showcase */}
+                <Stack gap={3}>
+                  <p style={{ margin: 0, fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-tertiary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Badge Gallery
+                  </p>
+                  <Stack direction="row" gap={2} wrap>
+                    {['default', 'primary', 'secondary', 'success', 'warning', 'error', 'info'].map((v) => (
+                      <Badge key={v} variant={v as Parameters<typeof Badge>[0]['variant']}>{v}</Badge>
+                    ))}
+                  </Stack>
+                  <Stack direction="row" gap={2} wrap>
+                    {['default', 'primary', 'success', 'warning', 'error', 'info'].map((v) => (
+                      <Badge key={v} variant={v as Parameters<typeof Badge>[0]['variant']} dot>{v}</Badge>
+                    ))}
+                  </Stack>
+                </Stack>
+              </div>
+            </div>
+
+            <div className="playground__controls">
+              <h2 className="playground__controls-title">Advanced Inputs</h2>
+
+              <div className="playground__control-group">
+                <label className="playground__control-label">OTP state</label>
+                <Stack gap={2}>
+                  <Switch label="Error state" checked={otpError} onChange={setOtpError} size="sm" />
+                </Stack>
+              </div>
+
+              <div className="playground__control-group">
+                <label className="playground__control-label">What's here</label>
+                <ul style={{ fontSize: 'var(--synu-font-size-xs)', color: 'var(--synu-text-secondary)', lineHeight: 2, margin: 0, paddingLeft: 16 }}>
+                  <li><strong>OTP Input</strong> — 6-digit code entry with paste support</li>
+                  <li><strong>File Drop Zone</strong> — drag & drop or click to upload</li>
+                  <li><strong>Badge Gallery</strong> — all variants including dot mode</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );

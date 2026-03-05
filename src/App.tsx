@@ -25,12 +25,38 @@ import { ChipPage } from './pages/docs/ChipPage';
 import { AlertPage } from './pages/docs/AlertPage';
 import { ProgressPage } from './pages/docs/ProgressPage';
 import { DialogPage } from './pages/docs/DialogPage';
+import { DrawerPage } from './pages/docs/DrawerPage';
 import { AccordionPage } from './pages/docs/AccordionPage';
 import { TabsPage } from './pages/docs/TabsPage';
 import { TooltipPage } from './pages/docs/TooltipPage';
+import { PopoverPage } from './pages/docs/PopoverPage';
+import { MenuPage } from './pages/docs/MenuPage';
 import { TablePage } from './pages/docs/TablePage';
 import { SnackbarPage } from './pages/docs/SnackbarPage';
 import { BreadcrumbsPage } from './pages/docs/BreadcrumbsPage';
+
+// New component pages
+import { PaginationPage } from './pages/docs/PaginationPage';
+import { TimelinePage } from './pages/docs/TimelinePage';
+import { TreeViewPage } from './pages/docs/TreeViewPage';
+import { StatisticPage } from './pages/docs/StatisticPage';
+import { EmptyStatePage } from './pages/docs/EmptyStatePage';
+import { ResultPage } from './pages/docs/ResultPage';
+import { StepperPage } from './pages/docs/StepperPage';
+import { BottomNavPage } from './pages/docs/BottomNavPage';
+import { NavigationRailPage } from './pages/docs/NavigationRailPage';
+import { CircularProgressPage } from './pages/docs/CircularProgressPage';
+import { ConfirmDialogPage } from './pages/docs/ConfirmDialogPage';
+import { HoverCardPage } from './pages/docs/HoverCardPage';
+import { ContextMenuPage } from './pages/docs/ContextMenuPage';
+import { SearchFieldPage } from './pages/docs/SearchFieldPage';
+import { TogglePage } from './pages/docs/TogglePage';
+import { DropdownPage } from './pages/docs/DropdownPage';
+import { CommandPalettePage } from './pages/docs/CommandPalettePage';
+import { ChartsPage } from './pages/docs/ChartsPage';
+import { VirtualizedListPage } from './pages/docs/VirtualizedListPage';
+import { InfiniteScrollPage } from './pages/docs/InfiniteScrollPage';
+import { AppBarPage } from './pages/docs/AppBarPage';
 
 function App() {
   return (
@@ -71,27 +97,51 @@ function App() {
             <Route path="select" element={<SelectPage />} />
             <Route path="switch" element={<SwitchPage />} />
             <Route path="slider" element={<SliderPage />} />
+            <Route path="search-field" element={<SearchFieldPage />} />
+            <Route path="toggle" element={<TogglePage />} />
 
             {/* Feedback */}
             <Route path="alert" element={<AlertPage />} />
-            <Route path="feedback" element={<ProgressPage />} />
             <Route path="progress" element={<ProgressPage />} />
+            <Route path="circular-progress" element={<CircularProgressPage />} />
             <Route path="snackbar" element={<SnackbarPage />} />
 
             {/* Navigation */}
             <Route path="breadcrumbs" element={<BreadcrumbsPage />} />
             <Route path="tabs" element={<TabsPage />} />
-            <Route path="menu" element={<TooltipPage />} />
+            <Route path="menu" element={<MenuPage />} />
+            <Route path="stepper" element={<StepperPage />} />
+            <Route path="bottom-nav" element={<BottomNavPage />} />
+            <Route path="nav-rail" element={<NavigationRailPage />} />
+            <Route path="app-bar" element={<AppBarPage />} />
 
             {/* Overlay */}
             <Route path="dialog" element={<DialogPage />} />
-            <Route path="drawer" element={<DialogPage />} />
+            <Route path="confirm-dialog" element={<ConfirmDialogPage />} />
+            <Route path="drawer" element={<DrawerPage />} />
             <Route path="tooltip" element={<TooltipPage />} />
-            <Route path="popover" element={<TooltipPage />} />
+            <Route path="popover" element={<PopoverPage />} />
+            <Route path="hover-card" element={<HoverCardPage />} />
+            <Route path="context-menu" element={<ContextMenuPage />} />
+            <Route path="dropdown" element={<DropdownPage />} />
+            <Route path="command-palette" element={<CommandPalettePage />} />
 
-            {/* Interactive */}
+            {/* Data Display */}
             <Route path="accordion" element={<AccordionPage />} />
             <Route path="table" element={<TablePage />} />
+            <Route path="pagination" element={<PaginationPage />} />
+            <Route path="timeline" element={<TimelinePage />} />
+            <Route path="treeview" element={<TreeViewPage />} />
+            <Route path="statistic" element={<StatisticPage />} />
+            <Route path="emptystate" element={<EmptyStatePage />} />
+            <Route path="result" element={<ResultPage />} />
+
+            {/* Charts */}
+            <Route path="charts" element={<ChartsPage />} />
+
+            {/* Performance */}
+            <Route path="virtual-list" element={<VirtualizedListPage />} />
+            <Route path="infinite-scroll" element={<InfiniteScrollPage />} />
 
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/docs/introduction" replace />} />
