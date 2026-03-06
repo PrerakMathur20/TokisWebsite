@@ -791,8 +791,8 @@ export function Landing() {
             <span className="site-footer__copy">© 2026 Tokis — MIT License</span>
           </div>
           <nav className="site-footer__links" aria-label="Footer navigation">
-            <a href="#" className="site-footer__link">GitHub</a>
-            <a href="#" className="site-footer__link">npm</a>
+            <a href="https://github.com/PrerakMathur20/TokisLib" className="site-footer__link">GitHub</a>
+            <a href="https://www.npmjs.com/package/tokis" className="site-footer__link">npm</a>
             <Link to="/docs/introduction" className="site-footer__link">Docs</Link>
             <Link to="/playground" className="site-footer__link">Playground</Link>
           </nav>
