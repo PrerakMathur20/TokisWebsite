@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Accordion, Stack, Badge } from '@tokis/react';
+import { Accordion, Stack, Badge } from '@tokis-ui/react';
 import { ComponentPreview, DemoControl, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 
@@ -60,8 +60,12 @@ const faqItems = [
     trigger: 'Is RTL supported?',
     content: (
       <p style={{ margin: 0, color: 'var(--tokis-text-secondary)', fontSize: 'var(--tokis-font-size-sm)', lineHeight: 1.6 }}>
-        RTL support is planned for the stable release. CSS logical properties are used where possible
-        to minimize the delta between LTR and RTL layouts.
+        Yes. All Tokis components — including Accordion — use CSS logical properties
+        (<code style={{ fontFamily: 'monospace', fontSize: '0.8em' }}>padding-inline-start/end</code>,{' '}
+        <code style={{ fontFamily: 'monospace', fontSize: '0.8em' }}>margin-inline-start/end</code>,{' '}
+        <code style={{ fontFamily: 'monospace', fontSize: '0.8em' }}>inset-inline-start/end</code>)
+        throughout. Set <code style={{ fontFamily: 'monospace', fontSize: '0.8em' }}>dir="rtl"</code> on
+        any ancestor element to flip the layout automatically.
       </p>
     ),
     disabled: false,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavButton } from '../../components/NavButton';
-import { ButtonLabel, Badge, Stack } from '@tokis/react';
+import { ButtonLabel, Badge, Stack } from '@tokis-ui/react';
 import { CodeBlock } from '../../components/CodeBlock';
 
 const components = [
@@ -27,15 +27,15 @@ export function ComponentsOverviewPage() {
         <h2 className="doc-section__title">Package</h2>
         <div className="section-pkg-row">
           <div className="section-pkg-badge-row">
-            <code className="section-pkg-name">@tokis/react</code>
+            <code className="section-pkg-name">@tokis-ui/react</code>
             <Badge variant="primary">All component logic and JSX</Badge>
           </div>
           <div className="section-pkg-badge-row">
-            <code className="section-pkg-name">@tokis/theme</code>
+            <code className="section-pkg-name">@tokis-ui/theme</code>
             <Badge variant="default">Component CSS (imported once)</Badge>
           </div>
         </div>
-        <CodeBlock language="tsx" code={`import { ButtonRoot, ButtonLabel, Badge, Card, CardBody, Avatar, Chip } from '@tokis/react';`} />
+        <CodeBlock language="tsx" code={`import { ButtonRoot, ButtonLabel, Badge, Card, CardBody, Avatar, Chip } from '@tokis-ui/react';`} />
       </div>
 
       <div className="doc-section">

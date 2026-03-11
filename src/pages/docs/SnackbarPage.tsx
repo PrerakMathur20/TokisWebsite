@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSnackbar, SnackbarContainer, ButtonRoot, ButtonLabel, Stack } from '@tokis/react';
+import { useSnackbar, SnackbarContainer, ButtonRoot, ButtonLabel, Stack } from '@tokis-ui/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 import { CodeBlock } from '../../components/CodeBlock';
@@ -132,7 +132,7 @@ export function SnackbarPage() {
         </p>
         <CodeBlock
           language="tsx"
-          code={`import { useSnackbar, SnackbarContainer } from '@tokis/react';
+          code={`import { useSnackbar, SnackbarContainer } from '@tokis-ui/react';
 
 // App root
 function App() {

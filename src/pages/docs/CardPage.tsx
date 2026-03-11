@@ -7,7 +7,7 @@ import {
   Stack,
   Divider,
   Progress,
-} from '@tokis/react';
+} from '@tokis-ui/react';
 import { ComponentPreview, DemoControl, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

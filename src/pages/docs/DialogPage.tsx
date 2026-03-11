@@ -6,7 +6,7 @@ import {
   TextField,
   Alert,
   Badge,
-} from '@tokis/react';
+} from '@tokis-ui/react';
 import { ComponentPreview, DemoControl } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

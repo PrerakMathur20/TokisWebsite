@@ -1,5 +1,5 @@
 import React from 'react';
-import { Timeline } from '@tokis/react';
+import { Timeline } from '@tokis-ui/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

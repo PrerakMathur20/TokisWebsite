@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Result, ButtonRoot, ButtonLabel } from '@tokis/react';
+import { Result, ButtonRoot, ButtonLabel } from '@tokis-ui/react';
 import { ComponentPreview, DemoControl } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BarChart, LineChart, PieChart, Sparkline } from '@tokis/react';
+import { BarChart, LineChart, PieChart, Sparkline } from '@tokis-ui/react';
 import { ComponentPreview, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

@@ -37,6 +37,7 @@ export const navigation: NavSection[] = [
       { label: 'Badge', path: '/docs/badge' },
       { label: 'Card', path: '/docs/card' },
       { label: 'Chip', path: '/docs/chip' },
+      { label: 'Icons', path: '/docs/icons', badge: 'New' },
     ],
   },
   {
@@ -51,6 +52,7 @@ export const navigation: NavSection[] = [
       { label: 'Switch', path: '/docs/switch' },
       { label: 'Search Field', path: '/docs/search-field' },
       { label: 'Toggle Button', path: '/docs/toggle' },
+      { label: 'Date Picker', path: '/docs/datepicker', badge: 'New' },
     ],
   },
   {
@@ -97,6 +99,7 @@ export const navigation: NavSection[] = [
     items: [
       { label: 'Accordion', path: '/docs/accordion' },
       { label: 'Table', path: '/docs/table' },
+      { label: 'DataGrid', path: '/docs/datagrid', badge: 'New' },
       { label: 'Pagination', path: '/docs/pagination' },
       { label: 'Timeline', path: '/docs/timeline' },
       { label: 'Tree View', path: '/docs/treeview' },

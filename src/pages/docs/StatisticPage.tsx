@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Statistic } from '@tokis/react';
+import { Statistic } from '@tokis-ui/react';
 import { ComponentPreview, DemoControl } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

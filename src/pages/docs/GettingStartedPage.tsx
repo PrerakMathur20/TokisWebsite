@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavButton } from '../../components/NavButton';
-import { ButtonLabel, Badge, Card, CardBody, Stack, Alert } from '@tokis/react';
+import { ButtonLabel, Badge, Card, CardBody, Stack, Alert } from '@tokis-ui/react';
 import { CodeBlock } from '../../components/CodeBlock';
 
 export function GettingStartedPage() {
@@ -23,43 +23,43 @@ export function GettingStartedPage() {
         <div className="section-pkg-grid">
           {[
             {
-              pkg: 'tokis',
+              pkg: 'tokis-ui',
               badge: 'Meta',
               badgeVariant: 'primary' as const,
               desc: 'Convenience wrapper. One install that re-exports everything. Perfect when you want the full design system.',
-              install: 'npm i tokis',
+              install: 'npm i tokis-ui',
               recommended: true,
             },
             {
-              pkg: '@tokis/react',
+              pkg: '@tokis-ui/react',
               badge: 'Components',
               badgeVariant: 'info' as const,
               desc: 'All React components, hooks, and context providers. Use this if you want granular control over what you install.',
-              install: 'npm i @tokis/react @tokis/theme',
+              install: 'npm i @tokis-ui/react @tokis-ui/theme',
               recommended: false,
             },
             {
-              pkg: '@tokis/theme',
+              pkg: '@tokis-ui/theme',
               badge: 'Styles',
               badgeVariant: 'default' as const,
-              desc: 'Pre-compiled CSS with all component styles and design tokens as CSS variables. Required alongside @tokis/react.',
-              install: 'npm i @tokis/theme',
+              desc: 'Pre-compiled CSS with all component styles and design tokens as CSS variables. Required alongside @tokis-ui/react.',
+              install: 'npm i @tokis-ui/theme',
               recommended: false,
             },
             {
-              pkg: '@tokis/tokens',
+              pkg: '@tokis-ui/tokens',
               badge: 'Tokens',
               badgeVariant: 'warning' as const,
               desc: 'Design token constants as TypeScript. Use when building custom components that need access to the token values at runtime.',
-              install: 'npm i @tokis/tokens',
+              install: 'npm i @tokis-ui/tokens',
               recommended: false,
             },
             {
-              pkg: '@tokis/core',
+              pkg: '@tokis-ui/core',
               badge: 'Headless',
               badgeVariant: 'default' as const,
-              desc: 'Framework-agnostic primitives: focus management, ARIA helpers, state machines. Used internally by @tokis/react. Only import directly for advanced use.',
-              install: 'npm i @tokis/core',
+              desc: 'Framework-agnostic primitives: focus management, ARIA helpers, state machines. Used internally by @tokis-ui/react. Only import directly for advanced use.',
+              install: 'npm i @tokis-ui/core',
               recommended: false,
             },
           ].map((p) => (
@@ -84,18 +84,18 @@ export function GettingStartedPage() {
         <h2 className="doc-section__title">Quick Start (2 minutes)</h2>
         <p className="doc-section__desc">The fastest path from zero to a rendered component:</p>
 
-        <CodeBlock language="bash" filename="1. Install" code="npm i tokis" />
+        <CodeBlock language="bash" filename="1. Install" code="npm i tokis-ui" />
         <CodeBlock
           language="tsx"
           filename="2. Import the theme (once, in main.tsx)"
-          code={`import 'tokis/theme';
+          code={`import 'tokis-ui/theme';
 // or if using individual packages:
-import '@tokis/theme';`}
+import '@tokis-ui/theme';`}
         />
         <CodeBlock
           language="tsx"
           filename="3. Wrap your app in ThemeProvider"
-          code={`import { ThemeProvider } from '@tokis/react';
+          code={`import { ThemeProvider } from '@tokis-ui/react';
 
 export default function App() {
   return (
@@ -108,7 +108,7 @@ export default function App() {
         <CodeBlock
           language="tsx"
           filename="4. Use components"
-          code={`import { ButtonRoot, ButtonLabel, Alert } from '@tokis/react';
+          code={`import { ButtonRoot, ButtonLabel, Alert } from '@tokis-ui/react';
 
 export function MyPage() {
   return (

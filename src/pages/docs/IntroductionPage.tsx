@@ -6,7 +6,7 @@ import {
   ButtonRoot, ButtonLabel,
   Stack,
   Card, CardBody,
-} from '@tokis/react';
+} from '@tokis-ui/react';
 import { CodeBlock } from '../../components/CodeBlock';
 
 export function IntroductionPage() {
@@ -95,10 +95,11 @@ export function IntroductionPage() {
         </p>
         <CodeBlock
           language="bash"
-          code={`@tokis/react    # React components, hooks, and context
-@tokis/theme    # Precompiled CSS (variables, reset, component styles)
-@tokis/tokens   # Design token definitions (TypeScript + JSON)
-@tokis/core     # Headless primitives (state machines, a11y, focus)`}
+          code={`@tokis-ui/react    # React components, hooks, and context
+@tokis-ui/theme    # Precompiled CSS (variables, reset, component styles)
+@tokis-ui/tokens   # Design token definitions (TypeScript + JSON)
+@tokis-ui/core     # Headless primitives (state machines, a11y, focus)
+@tokis-ui/icons    # Tree-shakable SVG icon library (Lucide-compatible)`}
         />
       </div>
 

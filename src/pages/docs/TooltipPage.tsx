@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tooltip, ButtonRoot, ButtonLabel, Stack } from '@tokis/react';
+import { Tooltip, ButtonRoot, ButtonLabel, Stack } from '@tokis-ui/react';
 import { ComponentPreview, DemoControl } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

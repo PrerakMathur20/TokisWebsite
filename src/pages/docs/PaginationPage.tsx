@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pagination } from '@tokis/react';
+import { Pagination } from '@tokis-ui/react';
 import { ComponentPreview, DemoControl } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

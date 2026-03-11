@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavButton } from '../../components/NavButton';
-import { ButtonLabel, Badge, Stack, Alert } from '@tokis/react';
+import { ButtonLabel, Badge, Stack, Alert } from '@tokis-ui/react';
 import { CodeBlock } from '../../components/CodeBlock';
 
 const components = [
@@ -32,21 +32,21 @@ export function OverlayOverviewPage() {
         <h2 className="doc-section__title">Package</h2>
         <div className="section-pkg-row">
           <div className="section-pkg-badge-row">
-            <code className="section-pkg-name">@tokis/react</code>
+            <code className="section-pkg-name">@tokis-ui/react</code>
             <Badge variant="primary">All overlay components</Badge>
           </div>
           <div className="section-pkg-badge-row">
-            <code className="section-pkg-name">@tokis/core</code>
+            <code className="section-pkg-name">@tokis-ui/core</code>
             <Badge variant="warning">Focus trap (Dialog, Drawer, CommandPalette)</Badge>
           </div>
         </div>
-        <CodeBlock language="tsx" code={`import { Dialog, DialogHeader, DialogBody, DialogFooter, Drawer, Tooltip, Popover } from '@tokis/react';`} />
+        <CodeBlock language="tsx" code={`import { Dialog, DialogHeader, DialogBody, DialogFooter, Drawer, Tooltip, Popover } from '@tokis-ui/react';`} />
       </div>
 
       <div className="doc-section">
         <h2 className="doc-section__title">Focus Management</h2>
         <p className="doc-section__desc">
-          Modal overlays (Dialog, Drawer, CommandPalette) use <code>@tokis/core</code>'s focus trap
+          Modal overlays (Dialog, Drawer, CommandPalette) use <code>@tokis-ui/core</code>'s focus trap
           to implement the WAI-ARIA modal pattern:
         </p>
         <CodeBlock language="tsx" code={`// When Dialog opens:

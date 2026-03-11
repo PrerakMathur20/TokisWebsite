@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumbs, Stack } from '@tokis/react';
+import { Breadcrumbs, Stack } from '@tokis-ui/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

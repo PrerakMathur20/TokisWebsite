@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, ButtonRoot, ButtonLabel, Stack } from '@tokis/react';
+import { Menu, ButtonRoot, ButtonLabel, Stack } from '@tokis-ui/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

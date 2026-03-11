@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ButtonRoot } from '@tokis/react';
-import type { ButtonRootProps } from '@tokis/react';
+import { ButtonRoot } from '@tokis-ui/react';
+import type { ButtonRootProps } from '@tokis-ui/react';
 
 // Typed wrapper for ButtonRoot used as a React Router Link
 type NavButtonProps = ButtonRootProps & { to: string };

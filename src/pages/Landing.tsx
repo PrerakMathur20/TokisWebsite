@@ -4,7 +4,7 @@ import {
   ButtonRoot, ButtonLabel,
   Badge, Avatar, Alert, Switch,
   Stack, Chip, Progress, Spinner, Rating,
-} from '@tokis/react';
+} from '@tokis-ui/react';
 import { NavButton } from '../components/NavButton';
 
 /* ── Animated counter ─────────────────────────────────── */
@@ -91,8 +91,8 @@ function HeroShowcase() {
   Badge, Alert, Progress,
   Switch, Chip, Avatar,
   Spinner, Rating,
-} from '@tokis/react';
-import '@tokis/theme/dist/index.css';
+} from '@tokis-ui/react';
+import '@tokis-ui/theme/dist/index.css';
 
 // Every variant — same predictable API
 <ButtonRoot variant="primary" size="lg">
@@ -289,7 +289,7 @@ function Demo0() {
 
 function Demo1() {
   const bars = [
-    { label: '@tokis/react', size: '18kb', pct: 18, color: '#7c3aed' },
+    { label: '@tokis-ui/react', size: '18kb', pct: 18, color: '#7c3aed' },
     { label: 'material-ui', size: '94kb', pct: 94, color: '#ef4444' },
     { label: 'chakra-ui',   size: '72kb', pct: 72, color: '#f97316' },
     { label: 'mantine',     size: '58kb', pct: 58, color: '#eab308' },
@@ -569,7 +569,7 @@ export function Landing() {
   }, []);
 
   const codeLines = [
-    "import { ButtonRoot, ButtonLabel } from '@tokis/react';",
+    "import { ButtonRoot, ButtonLabel } from '@tokis-ui/react';",
     '',
     '// Compound components — no prop explosion',
     '<ButtonRoot variant="primary" size="lg">',
@@ -770,7 +770,7 @@ export function Landing() {
             one install command.
           </p>
           <div className="lpv3-cta__install">
-            <code>npm install @tokis/react @tokis/theme</code>
+            <code>npm install @tokis-ui/react @tokis-ui/theme</code>
           </div>
           <Stack direction="row" gap={3} justify="center" wrap>
             <NavButton to="/docs/introduction" size="lg" variant="primary">
@@ -792,7 +792,7 @@ export function Landing() {
           </div>
           <nav className="site-footer__links" aria-label="Footer navigation">
             <a href="https://github.com/PrerakMathur20/TokisLib" className="site-footer__link">GitHub</a>
-            <a href="https://www.npmjs.com/package/tokis" className="site-footer__link">npm</a>
+            <a href="https://www.npmjs.com/package/tokis-ui" className="site-footer__link">npm</a>
             <Link to="/docs/introduction" className="site-footer__link">Docs</Link>
             <Link to="/playground" className="site-footer__link">Playground</Link>
           </nav>

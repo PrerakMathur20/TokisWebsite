@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ConfirmDialog, ButtonRoot, ButtonLabel, Stack } from '@tokis/react';
+import { ConfirmDialog, ButtonRoot, ButtonLabel, Stack } from '@tokis-ui/react';
 import { ComponentPreview, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

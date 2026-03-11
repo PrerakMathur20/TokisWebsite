@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { VirtualizedList } from '@tokis/react';
+import { VirtualizedList } from '@tokis-ui/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

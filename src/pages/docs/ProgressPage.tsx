@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Progress, Spinner, Skeleton, Stack } from '@tokis/react';
+import { Progress, Spinner, Skeleton, Stack } from '@tokis-ui/react';
 import { ComponentPreview, DemoControl, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 import { CodeBlock } from '../../components/CodeBlock';
@@ -246,7 +246,7 @@ export function ProgressPage() {
         <h2 className="doc-section__title">Usage</h2>
         <CodeBlock
           language="tsx"
-          code={`import { Progress, Spinner, Skeleton } from '@tokis/react';
+          code={`import { Progress, Spinner, Skeleton } from '@tokis-ui/react';
 
 // Determinate progress
 <Progress value={progress} variant="success" showValue label="Uploading" />

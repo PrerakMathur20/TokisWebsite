@@ -14,7 +14,7 @@ function getTokisVersion(): string {
   // Local dev: read from sibling TokisLib
   try { return readVersion(resolve(__dirname, '../TokisLib/packages/tokis/package.json')); } catch {}
   // CI: read directly from node_modules (bypasses exports field restriction)
-  try { return readVersion(resolve(__dirname, 'node_modules/@tokis/react/package.json')); } catch {}
+  try { return readVersion(resolve(__dirname, 'node_modules/@tokis-ui/react/package.json')); } catch {}
   return '0.0.0';
 }
 

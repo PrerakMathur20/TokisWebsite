@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tabs, Badge, Stack, Alert } from '@tokis/react';
+import { Tabs, Badge, Stack, Alert } from '@tokis-ui/react';
 import { ComponentPreview, DemoControl, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

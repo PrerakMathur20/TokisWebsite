@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavButton } from '../../components/NavButton';
-import { ButtonLabel, Badge, Stack, Alert } from '@tokis/react';
+import { ButtonLabel, Badge, Stack, Alert } from '@tokis-ui/react';
 import { CodeBlock } from '../../components/CodeBlock';
 
 export function PerformanceOverviewPage() {
@@ -19,11 +19,11 @@ export function PerformanceOverviewPage() {
         <h2 className="doc-section__title">Package</h2>
         <div className="section-pkg-row">
           <div className="section-pkg-badge-row">
-            <code className="section-pkg-name">@tokis/react</code>
+            <code className="section-pkg-name">@tokis-ui/react</code>
             <Badge variant="primary">VirtualizedList, InfiniteScroll</Badge>
           </div>
         </div>
-        <CodeBlock language="tsx" code={`import { VirtualizedList, InfiniteScroll } from '@tokis/react';`} />
+        <CodeBlock language="tsx" code={`import { VirtualizedList, InfiniteScroll } from '@tokis-ui/react';`} />
       </div>
 
       <div className="doc-section">

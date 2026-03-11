@@ -1,9 +1,9 @@
-# Tokis Website
+# tokis-ui Website
 
 [![GitHub](https://img.shields.io/badge/GitHub-PrerakMathur20%2FTokisWebsite-181717?logo=github)](https://github.com/PrerakMathur20/TokisWebsite)
 [![Deploy](https://github.com/PrerakMathur20/TokisWebsite/actions/workflows/deploy.yml/badge.svg)](https://github.com/PrerakMathur20/TokisWebsite/actions/workflows/deploy.yml)
 
-Documentation and playground for [Tokis](https://prerakmathur20.github.io/TokisWebsite/) — *Tokis Only Knows Its Styles*, a performance-first, token-native UI design system for React.
+Documentation and playground for [tokis-ui](https://prerakmathur20.github.io/TokisWebsite/) — *Tokis Only Knows Its Styles*, a performance-first, token-native UI design system for React.
 
 ## Prerequisites
 
@@ -69,8 +69,8 @@ src/
 - [React 18](https://react.dev) + [TypeScript](https://typescriptlang.org)
 - [Vite 6](https://vitejs.dev)
 - [React Router v6](https://reactrouter.com)
-- [`@tokis/react`](../TokisLib/packages/react) — components
-- [`@tokis/theme`](../TokisLib/packages/theme) — CSS design tokens
+- [`@tokis-ui/react`](../TokisLib/packages/react) — components
+- [`@tokis-ui/theme`](../TokisLib/packages/theme) — CSS design tokens
 
 ## Development Notes
 

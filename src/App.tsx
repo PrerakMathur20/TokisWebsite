@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { ThemeProvider } from '@tokis/react';
+import { ThemeProvider } from '@tokis-ui/react';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -32,6 +32,7 @@ import { AvatarPage } from './pages/docs/AvatarPage';
 import { BadgePage } from './pages/docs/BadgePage';
 import { ChipPage } from './pages/docs/ChipPage';
 import { CardPage } from './pages/docs/CardPage';
+import { IconsPage } from './pages/docs/IconsPage';
 
 // Docs — Forms
 import { FormsOverviewPage } from './pages/docs/FormsOverviewPage';
@@ -43,6 +44,7 @@ import { SwitchPage } from './pages/docs/SwitchPage';
 import { SliderPage } from './pages/docs/SliderPage';
 import { SearchFieldPage } from './pages/docs/SearchFieldPage';
 import { TogglePage } from './pages/docs/TogglePage';
+import { DatePickerPage } from './pages/docs/DatePickerPage';
 
 // Docs — Feedback
 import { FeedbackOverviewPage } from './pages/docs/FeedbackOverviewPage';
@@ -77,6 +79,7 @@ import { CommandPalettePage } from './pages/docs/CommandPalettePage';
 import { DataDisplayOverviewPage } from './pages/docs/DataDisplayOverviewPage';
 import { AccordionPage } from './pages/docs/AccordionPage';
 import { TablePage } from './pages/docs/TablePage';
+import { DataGridPage } from './pages/docs/DataGridPage';
 import { PaginationPage } from './pages/docs/PaginationPage';
 import { TimelinePage } from './pages/docs/TimelinePage';
 import { TreeViewPage } from './pages/docs/TreeViewPage';
@@ -128,6 +131,7 @@ function App() {
             <Route path="badge" element={<BadgePage />} />
             <Route path="chip" element={<ChipPage />} />
             <Route path="card" element={<CardPage />} />
+            <Route path="icons" element={<IconsPage />} />
 
             {/* Forms */}
             <Route path="forms" element={<FormsOverviewPage />} />
@@ -140,6 +144,7 @@ function App() {
             <Route path="slider" element={<SliderPage />} />
             <Route path="search-field" element={<SearchFieldPage />} />
             <Route path="toggle" element={<TogglePage />} />
+            <Route path="datepicker" element={<DatePickerPage />} />
 
             {/* Feedback */}
             <Route path="feedback" element={<FeedbackOverviewPage />} />
@@ -174,6 +179,7 @@ function App() {
             <Route path="data-display" element={<DataDisplayOverviewPage />} />
             <Route path="accordion" element={<AccordionPage />} />
             <Route path="table" element={<TablePage />} />
+            <Route path="datagrid" element={<DataGridPage />} />
             <Route path="pagination" element={<PaginationPage />} />
             <Route path="timeline" element={<TimelinePage />} />
             <Route path="treeview" element={<TreeViewPage />} />

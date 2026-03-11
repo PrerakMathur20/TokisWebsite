@@ -3,7 +3,7 @@ import {
   TextField, Textarea, Checkbox, RadioGroup, Radio,
   Switch, Select, Slider,
   Stack,
-} from '@tokis/react';
+} from '@tokis-ui/react';
 import { ComponentPreview, DemoControl, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 import { CodeBlock } from '../../components/CodeBlock';
