@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, ButtonRoot, ButtonLabel, Stack, Tabs } from '@tokis-ui/react';
+import { Alert, ButtonRoot, ButtonLabel, Stack, Tabs } from '@tokis/react';
 import { NavButton } from '../../components/NavButton';
 import { CodeBlock } from '../../components/CodeBlock';
 
@@ -20,7 +20,8 @@ export function InstallationPage() {
         <div className="gs-step__content">
           <h2 className="gs-step__title">Install packages</h2>
           <p style={{ margin: '0 0 var(--tokis-spacing-4)', color: 'var(--tokis-text-secondary)', fontSize: 'var(--tokis-font-size-sm)' }}>
-            Install the React adapter and the default theme.
+            Install the React adapter, default theme, and peer dependencies. Or use{' '}
+            <code className="inline-code">@tokis/tokis</code> to install everything at once.
           </p>
           <Tabs
             variant="pills"
@@ -32,7 +33,7 @@ export function InstallationPage() {
                   <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
                     <CodeBlock
                       language="bash"
-                      code={`npm install @tokis-ui/react @tokis-ui/theme`}
+                      code={`npm install @tokis/react @tokis/theme @tokis/core @tokis/tokens`}
                     />
                   </div>
                 ),
@@ -44,7 +45,7 @@ export function InstallationPage() {
                   <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
                     <CodeBlock
                       language="bash"
-                      code={`pnpm add @tokis-ui/react @tokis-ui/theme`}
+                      code={`pnpm add @tokis/react @tokis/theme @tokis/core @tokis/tokens`}
                     />
                   </div>
                 ),
@@ -56,7 +57,7 @@ export function InstallationPage() {
                   <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
                     <CodeBlock
                       language="bash"
-                      code={`yarn add @tokis-ui/react @tokis-ui/theme`}
+                      code={`yarn add @tokis/react @tokis/theme @tokis/core @tokis/tokens`}
                     />
                   </div>
                 ),
@@ -77,11 +78,11 @@ export function InstallationPage() {
           <CodeBlock
             language="tsx"
             filename="src/main.tsx"
-            code={`import '@tokis-ui/theme';  // Full bundle: reset + tokens + all components
+            code={`import '@tokis/theme';  // Full bundle: reset + tokens + all components
 
 // Or import selectively:
-import '@tokis-ui/theme/base';        // Reset + variables only
-import '@tokis-ui/theme/components';  // All component styles`}
+import '@tokis/theme/base';        // Reset + variables only
+import '@tokis/theme/components';  // All component styles`}
           />
         </div>
       </div>
@@ -101,8 +102,8 @@ import '@tokis-ui/theme/components';  // All component styles`}
             filename="src/main.tsx"
             code={`import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ThemeProvider } from '@tokis-ui/react';
-import '@tokis-ui/theme';
+import { ThemeProvider } from '@tokis/react';
+import '@tokis/theme';
 import App from './App';
 
 createRoot(document.getElementById('root')!).render(
@@ -154,7 +155,7 @@ createRoot(document.getElementById('root')!).render(
   ButtonLabel,
   ButtonIcon,
   useTheme,
-} from '@tokis-ui/react';
+} from '@tokis/react';
 
 export function App() {
   const { mode, toggle } = useTheme();
@@ -182,7 +183,7 @@ export function App() {
         <div className="gs-step__content">
           <h2 className="gs-step__title">Optional: install the icon library</h2>
           <p style={{ margin: '0 0 var(--tokis-spacing-4)', color: 'var(--tokis-text-secondary)', fontSize: 'var(--tokis-font-size-sm)' }}>
-            <code className="inline-code">@tokis-ui/icons</code> is a separate, fully tree-shakable
+            <code className="inline-code">@tokis/icons</code> is a separate, fully tree-shakable
             SVG icon package. Install it only if you need icons — it won't bloat your bundle
             if you don't import it.
           </p>
@@ -194,7 +195,7 @@ export function App() {
                 label: 'npm',
                 content: (
                   <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
-                    <CodeBlock language="bash" code="npm install @tokis-ui/icons" />
+                    <CodeBlock language="bash" code="npm install @tokis/icons" />
                   </div>
                 ),
               },
@@ -203,7 +204,7 @@ export function App() {
                 label: 'pnpm',
                 content: (
                   <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
-                    <CodeBlock language="bash" code="pnpm add @tokis-ui/icons" />
+                    <CodeBlock language="bash" code="pnpm add @tokis/icons" />
                   </div>
                 ),
               },
@@ -212,7 +213,7 @@ export function App() {
                 label: 'yarn',
                 content: (
                   <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
-                    <CodeBlock language="bash" code="yarn add @tokis-ui/icons" />
+                    <CodeBlock language="bash" code="yarn add @tokis/icons" />
                   </div>
                 ),
               },
@@ -220,7 +221,7 @@ export function App() {
           />
           <CodeBlock
             language="tsx"
-            code={`import { SearchIcon, CheckIcon, TrashIcon } from '@tokis-ui/icons';
+            code={`import { SearchIcon, CheckIcon, TrashIcon } from '@tokis/icons';
 
 // Each icon is tree-shakable — only imported icons land in your bundle
 <ButtonRoot variant="primary">

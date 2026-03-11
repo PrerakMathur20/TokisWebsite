@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Stack, Divider } from '@tokis-ui/react';
+import { Typography, Stack, Divider } from '@tokis/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 import { CodeBlock } from '../../components/CodeBlock';
@@ -32,7 +32,7 @@ export function TypographyPage() {
           Headings and body text rendered at their default sizes.
         </p>
         <ComponentPreview
-          code={`import { Typography } from '@tokis-ui/react';
+          code={`import { Typography } from '@tokis/react';
 
 <Typography variant="h1">Heading 1</Typography>
 <Typography variant="h2">Heading 2</Typography>

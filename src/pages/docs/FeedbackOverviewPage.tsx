@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavButton } from '../../components/NavButton';
-import { ButtonLabel, Badge, Stack } from '@tokis-ui/react';
+import { ButtonLabel, Badge, Stack } from '@tokis/react';
 import { CodeBlock } from '../../components/CodeBlock';
 
 const components = [
@@ -27,11 +27,11 @@ export function FeedbackOverviewPage() {
         <h2 className="doc-section__title">Package</h2>
         <div className="section-pkg-row">
           <div className="section-pkg-badge-row">
-            <code className="section-pkg-name">@tokis-ui/react</code>
+            <code className="section-pkg-name">@tokis/react</code>
             <Badge variant="primary">All feedback components</Badge>
           </div>
         </div>
-        <CodeBlock language="tsx" code={`import { Alert, Progress, CircularProgress, Snackbar } from '@tokis-ui/react';`} />
+        <CodeBlock language="tsx" code={`import { Alert, Progress, CircularProgress, Snackbar } from '@tokis/react';`} />
       </div>
 
       <div className="doc-section">

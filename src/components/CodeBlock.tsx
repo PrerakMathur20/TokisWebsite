@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { CodeBlock as TokisCodeBlock } from '@tokis-ui/react';
+import { CodeBlock as TokisCodeBlock } from '@tokis/react';
 
 // Lazy-load highlight.js languages
 let hljs: typeof import('highlight.js').default | null = null;

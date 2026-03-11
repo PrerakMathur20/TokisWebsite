@@ -7,7 +7,7 @@ import {
   Select,
   Badge,
   Checkbox,
-} from '@tokis-ui/react';
+} from '@tokis/react';
 import { ComponentPreview, DemoControl } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

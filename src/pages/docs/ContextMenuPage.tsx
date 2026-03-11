@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ContextMenu } from '@tokis-ui/react';
+import { ContextMenu } from '@tokis/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

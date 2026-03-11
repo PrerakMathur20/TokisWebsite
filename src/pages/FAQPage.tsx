@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavButton } from '../components/NavButton';
-import { ButtonLabel, Stack, Badge } from '@tokis-ui/react';
+import { ButtonLabel, Stack, Badge } from '@tokis/react';
 import { CodeBlock } from '../components/CodeBlock';
 
 interface FAQItem {
@@ -30,7 +30,7 @@ const faqs: FAQItem[] = [
         <ul>
           <li><strong>No runtime CSS overhead.</strong> Unlike MUI which uses CSS-in-JS (Emotion), Tokis ships pre-compiled static CSS. No style injection at runtime, no hydration issues.</li>
           <li><strong>Token-native from the ground up.</strong> Every visual property is a CSS variable. Theming means overriding variables — no theme object configs, no provider nesting.</li>
-          <li><strong>Framework-agnostic core.</strong> The headless logic lives in <code>@tokis-ui/core</code>, separate from React. shadcn/ui is React-only; Tokis is designed for future Vue and Svelte adapters.</li>
+          <li><strong>Framework-agnostic core.</strong> The headless logic lives in <code>@tokis/core</code>, separate from React. shadcn/ui is React-only; Tokis is designed for future Vue and Svelte adapters.</li>
         </ul>
       </>
     ),
@@ -50,7 +50,7 @@ const faqs: FAQItem[] = [
     category: 'Installation',
     q: 'What\'s the simplest way to install Tokis?',
     a: (
-      <CodeBlock language="bash" code={`npm i tokis-ui\n# Then in your main entry file:\nimport 'tokis-ui/theme';`} />
+      <CodeBlock language="bash" code={`npm i @tokis/tokis\n# Then in your main entry file:\nimport '@tokis/theme';`} />
     ),
   },
   {
@@ -59,9 +59,9 @@ const faqs: FAQItem[] = [
     a: (
       <>
         <p>Yes. The monorepo has four focused packages:</p>
-        <CodeBlock language="bash" code={`npm i @tokis-ui/react @tokis-ui/theme   # React components + styles (most common)
-npm i @tokis-ui/tokens               # Just the design tokens (TypeScript constants)
-npm i @tokis-ui/core                 # Just the headless primitives`} />
+        <CodeBlock language="bash" code={`npm i @tokis/react @tokis/theme @tokis/core @tokis/tokens   # React components + styles + peer deps
+npm i @tokis/tokens               # Just the design tokens (TypeScript constants)
+npm i @tokis/core                 # Just the headless primitives`} />
       </>
     ),
   },
@@ -71,8 +71,8 @@ npm i @tokis-ui/core                 # Just the headless primitives`} />
     a: (
       <>
         <p>Yes. Import the theme CSS in your root layout:</p>
-        <CodeBlock language="tsx" filename="app/layout.tsx" code={`import 'tokis-ui/theme'; // or '@tokis-ui/theme'
-import { ThemeProvider } from '@tokis-ui/react';
+        <CodeBlock language="tsx" filename="app/layout.tsx" code={`import '@tokis/theme';
+import { ThemeProvider } from '@tokis/react';
 
 export default function RootLayout({ children }) {
   return (
@@ -109,13 +109,13 @@ export default function RootLayout({ children }) {
     a: (
       <>
         <p>Tokis ships a built-in dark theme. Wrap your app in <code>ThemeProvider</code> and use the <code>useTheme</code> hook to toggle:</p>
-        <CodeBlock language="tsx" code={`import { ThemeProvider, useTheme } from '@tokis-ui/react';
+        <CodeBlock language="tsx" code={`import { ThemeProvider, useTheme } from '@tokis/react';
 
 function ThemeToggle() {
   const { mode, toggle } = useTheme();
   return <button onClick={toggle}>{mode === 'light' ? '🌙' : '☀️'}</button>;
 }`} />
-        <p>Internally, <code>ThemeProvider</code> sets <code>data-theme="dark"</code> on the <code>&lt;html&gt;</code> element, and <code>@tokis-ui/theme</code> has a full dark-mode token set under <code>[data-theme="dark"]</code>.</p>
+        <p>Internally, <code>ThemeProvider</code> sets <code>data-theme="dark"</code> on the <code>&lt;html&gt;</code> element, and <code>@tokis/theme</code> has a full dark-mode token set under <code>[data-theme="dark"]</code>.</p>
       </>
     ),
   },
@@ -152,7 +152,7 @@ function ThemeToggle() {
     q: 'Does Tokis handle focus management for modals?',
     a: (
       <>
-        <p>Yes. Dialog, Drawer, and CommandPalette use the focus trap from <code>@tokis-ui/core</code> which implements the WAI-ARIA modal pattern:</p>
+        <p>Yes. Dialog, Drawer, and CommandPalette use the focus trap from <code>@tokis/core</code> which implements the WAI-ARIA modal pattern:</p>
         <ul>
           <li>Focus moves to the first focusable element when opened</li>
           <li>Tab/Shift+Tab cycle only within the modal</li>
@@ -175,7 +175,7 @@ function ThemeToggle() {
       <CodeBlock language="tsx" code={`// ButtonRoot accepts an "as" prop to change the rendered element
 // Type inference works for links, router links, etc.
 
-import { ButtonRoot, ButtonLabel } from '@tokis-ui/react';
+import { ButtonRoot, ButtonLabel } from '@tokis/react';
 import { Link } from 'react-router-dom';
 
 // Renders as <a> with correct href types

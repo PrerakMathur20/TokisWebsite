@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavButton } from '../../components/NavButton';
-import { ButtonLabel, Badge, Stack, Alert } from '@tokis-ui/react';
+import { ButtonLabel, Badge, Stack, Alert } from '@tokis/react';
 import { CodeBlock } from '../../components/CodeBlock';
 
 const components = [
@@ -31,15 +31,15 @@ export function FormsOverviewPage() {
         <h2 className="doc-section__title">Package</h2>
         <div className="section-pkg-row">
           <div className="section-pkg-badge-row">
-            <code className="section-pkg-name">@tokis-ui/react</code>
+            <code className="section-pkg-name">@tokis/react</code>
             <Badge variant="primary">All form components</Badge>
           </div>
           <div className="section-pkg-badge-row">
-            <code className="section-pkg-name">@tokis-ui/core</code>
+            <code className="section-pkg-name">@tokis/core</code>
             <Badge variant="default">Roving tabindex (Radio), controllable state utilities</Badge>
           </div>
         </div>
-        <CodeBlock language="tsx" code={`import { TextField, Checkbox, Radio, RadioGroup, Select, Slider, Switch } from '@tokis-ui/react';`} />
+        <CodeBlock language="tsx" code={`import { TextField, Checkbox, Radio, RadioGroup, Select, Slider, Switch } from '@tokis/react';`} />
       </div>
 
       <div className="doc-section">

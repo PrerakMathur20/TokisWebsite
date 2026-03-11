@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { ThemeProvider } from '@tokis-ui/react';
+import { ThemeProvider } from '@tokis/react';
 
 function ScrollToTop() {
   const { pathname } = useLocation();

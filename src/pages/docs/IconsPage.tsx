@@ -1,12 +1,12 @@
 import React from 'react';
-import { Stack, Badge, Alert, Tabs, ButtonRoot, ButtonLabel } from '@tokis-ui/react';
+import { Stack, Badge, Alert, Tabs, ButtonRoot, ButtonLabel } from '@tokis/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 import { CodeBlock } from '../../components/CodeBlock';
 import { NavButton } from '../../components/NavButton';
 
-// ─── Inline icon demos (so the page works without @tokis-ui/icons installed) ────
-// These mirror what @tokis-ui/icons outputs — use actual package in production.
+// ─── Inline icon demos (so the page works without @tokis/icons installed) ────
+// These mirror what @tokis/icons outputs — use actual package in production.
 
 interface IconDemoProps {
   size?: number;
@@ -94,7 +94,7 @@ export function IconsPage() {
         <p className="doc-page__eyebrow">Utilities</p>
         <h1 className="doc-page__title">Icons</h1>
         <p className="doc-page__desc">
-          <code className="inline-code">@tokis-ui/icons</code> — a tree-shakable SVG icon library
+          <code className="inline-code">@tokis/icons</code> — a tree-shakable SVG icon library
           built on the Lucide icon set (MIT). Every icon is a separate named export with
           a 24×24 viewBox, 2px round-capped strokes, and full ref forwarding.
         </p>
@@ -114,7 +114,7 @@ export function IconsPage() {
               label: 'npm',
               content: (
                 <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
-                  <CodeBlock language="bash" code="npm install @tokis-ui/icons" />
+                  <CodeBlock language="bash" code="npm install @tokis/icons" />
                 </div>
               ),
             },
@@ -123,7 +123,7 @@ export function IconsPage() {
               label: 'pnpm',
               content: (
                 <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
-                  <CodeBlock language="bash" code="pnpm add @tokis-ui/icons" />
+                  <CodeBlock language="bash" code="pnpm add @tokis/icons" />
                 </div>
               ),
             },
@@ -132,7 +132,7 @@ export function IconsPage() {
               label: 'yarn',
               content: (
                 <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
-                  <CodeBlock language="bash" code="yarn add @tokis-ui/icons" />
+                  <CodeBlock language="bash" code="yarn add @tokis/icons" />
                 </div>
               ),
             },
@@ -148,7 +148,7 @@ export function IconsPage() {
           every icon you don't use.
         </p>
         <ComponentPreview
-          code={`import { SearchIcon, CheckIcon, TrashIcon } from '@tokis-ui/icons';
+          code={`import { SearchIcon, CheckIcon, TrashIcon } from '@tokis/icons';
 
 // Decorative (inside a labelled button) — aria-hidden applied automatically
 <ButtonRoot variant="primary">
@@ -188,7 +188,7 @@ export function IconsPage() {
           All icons inherit <code className="inline-code">currentColor</code> by default.
         </p>
         <ComponentPreview
-          code={`import { StarIcon } from '@tokis-ui/icons';
+          code={`import { StarIcon } from '@tokis/icons';
 
 // numeric px
 <SearchIcon size={16} />
@@ -303,7 +303,7 @@ export function IconsPage() {
         <CodeBlock
           language="tsx"
           filename="src/icons/StarIcon.tsx"
-          code={`import { createIcon } from '@tokis-ui/icons';
+          code={`import { createIcon } from '@tokis/icons';
 
 export const StarIcon = createIcon(
   'StarIcon',             // displayName

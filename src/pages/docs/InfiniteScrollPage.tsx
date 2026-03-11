@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { InfiniteScroll } from '@tokis-ui/react';
+import { InfiniteScroll } from '@tokis/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

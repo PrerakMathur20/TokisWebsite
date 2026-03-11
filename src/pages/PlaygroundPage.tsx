@@ -17,7 +17,7 @@ import {
   FileDropZone,
   Accordion,
   CodeBlock,
-} from '@tokis-ui/react';
+} from '@tokis/react';
 
 // ─── Icons ───────────────────────────────────────────────────
 

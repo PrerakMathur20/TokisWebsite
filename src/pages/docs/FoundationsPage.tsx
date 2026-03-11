@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavButton } from '../../components/NavButton';
-import { ButtonLabel, Badge, Card, CardBody, Stack } from '@tokis-ui/react';
+import { ButtonLabel, Badge, Card, CardBody, Stack } from '@tokis/react';
 import { CodeBlock } from '../../components/CodeBlock';
 
 export function FoundationsPage() {
@@ -20,11 +20,11 @@ export function FoundationsPage() {
         <p className="doc-section__desc">Foundations are spread across two packages:</p>
         <div className="section-pkg-row">
           <div className="section-pkg-badge-row">
-            <code className="section-pkg-name">@tokis-ui/tokens</code>
+            <code className="section-pkg-name">@tokis/tokens</code>
             <Badge variant="info">Token values as TypeScript constants</Badge>
           </div>
           <div className="section-pkg-badge-row">
-            <code className="section-pkg-name">@tokis-ui/theme</code>
+            <code className="section-pkg-name">@tokis/theme</code>
             <Badge variant="default">CSS variables + component styles</Badge>
           </div>
         </div>

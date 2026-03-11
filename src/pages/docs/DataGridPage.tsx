@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { DataGrid, Badge, Avatar, Stack, ButtonRoot, ButtonLabel, Alert } from '@tokis-ui/react';
-import type { DataGridColumn } from '@tokis-ui/react';
+import { DataGrid, Badge, Avatar, Stack, ButtonRoot, ButtonLabel, Alert } from '@tokis/react';
+import type { DataGridColumn } from '@tokis/react';
 import { ComponentPreview, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 import { CodeBlock } from '../../components/CodeBlock';
@@ -166,8 +166,8 @@ export function DataGridPage() {
         <h2 className="doc-section__title">Interactive Playground</h2>
         <ComponentPreview
           padless
-          code={`import { DataGrid } from '@tokis-ui/react';
-import type { DataGridColumn } from '@tokis-ui/react';
+          code={`import { DataGrid } from '@tokis/react';
+import type { DataGridColumn } from '@tokis/react';
 
 const columns: DataGridColumn<User>[] = [
   {
@@ -228,8 +228,8 @@ const columns: DataGridColumn<User>[] = [
         <CodeBlock
           language="tsx"
           code={`import { useState } from 'react';
-import { DataGrid } from '@tokis-ui/react';
-import type { SortModel } from '@tokis-ui/react';
+import { DataGrid } from '@tokis/react';
+import type { SortModel } from '@tokis/react';
 
 function ControlledSort() {
   const [sortModel, setSortModel] = useState<SortModel>({ field: 'name', direction: 'asc' });

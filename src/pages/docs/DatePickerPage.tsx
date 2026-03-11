@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DatePicker, TimePicker, DateTimePicker, Stack, Alert, Badge } from '@tokis-ui/react';
+import { DatePicker, TimePicker, DateTimePicker, Stack, Alert, Badge } from '@tokis/react';
 import { ComponentPreview, DemoControl, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 import { CodeBlock } from '../../components/CodeBlock';
@@ -79,7 +79,7 @@ export function DatePickerPage() {
           Dismisses on outside click, Escape key, or after a date is selected.
         </p>
         <ComponentPreview
-          code={`import { DatePicker } from '@tokis-ui/react';
+          code={`import { DatePicker } from '@tokis/react';
 
 // Controlled
 const [value, setValue] = useState<string | undefined>('2025-03-15');
@@ -172,7 +172,7 @@ const [value, setValue] = useState<string | undefined>('2025-03-15');
           elements. Supports 12/24-hour format and configurable minute steps.
         </p>
         <ComponentPreview
-          code={`import { TimePicker } from '@tokis-ui/react';
+          code={`import { TimePicker } from '@tokis/react';
 
 <TimePicker
   label="Meeting time"
@@ -222,7 +222,7 @@ const [value, setValue] = useState<string | undefined>('2025-03-15');
           Value format: <code className="inline-code">YYYY-MM-DDTHH:MM</code>.
         </p>
         <ComponentPreview
-          code={`import { DateTimePicker } from '@tokis-ui/react';
+          code={`import { DateTimePicker } from '@tokis/react';
 
 const [value, setValue] = useState<string | undefined>('2025-03-15T14:30');
 

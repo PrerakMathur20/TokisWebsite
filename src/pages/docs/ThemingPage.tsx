@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Badge, ButtonRoot, ButtonLabel, Stack, Card, CardBody, CardTitle, CardDescription, Switch, useTheme } from '@tokis-ui/react';
+import { Alert, Badge, ButtonRoot, ButtonLabel, Stack, Card, CardBody, CardTitle, CardDescription, Switch, useTheme } from '@tokis/react';
 import { CodeBlock } from '../../components/CodeBlock';
 import { ComponentPreview } from '../../components/ComponentPreview';
 
@@ -37,7 +37,7 @@ export function ThemingPage() {
         </p>
         <CodeBlock
           language="css"
-          filename="@tokis-ui/theme variables.css (simplified)"
+          filename="@tokis/theme variables.css (simplified)"
           code={`:root {
   --tokis-color-primary: #0066ff;
   --tokis-color-background: #ffffff;
@@ -62,7 +62,7 @@ export function ThemingPage() {
           Use the <code className="inline-code">useTheme()</code> hook to read and change the theme.
         </p>
         <ComponentPreview
-          code={`import { useTheme, Switch, Badge, Stack } from '@tokis-ui/react';
+          code={`import { useTheme, Switch, Badge, Stack } from '@tokis/react';
 
 function ThemeToggle() {
   const { mode, toggle, setMode } = useTheme();
@@ -94,7 +94,7 @@ function ThemeToggle() {
         <CodeBlock
           language="css"
           filename="src/styles/brand.css"
-          code={`/* Brand override — must come AFTER @tokis-ui/theme import */
+          code={`/* Brand override — must come AFTER @tokis/theme import */
 :root {
   /* Change primary color to your brand color */
   --tokis-color-primary: #7c3aed;

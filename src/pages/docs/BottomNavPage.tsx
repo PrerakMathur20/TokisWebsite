@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BottomNavigation, Stack } from '@tokis-ui/react';
+import { BottomNavigation, Stack } from '@tokis/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

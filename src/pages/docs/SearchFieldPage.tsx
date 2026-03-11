@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SearchField } from '@tokis-ui/react';
+import { SearchField } from '@tokis/react';
 import { ComponentPreview } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

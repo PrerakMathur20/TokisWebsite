@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Textarea, Stack } from '@tokis-ui/react';
+import { TextField, Textarea, Stack } from '@tokis/react';
 import { ComponentPreview, DemoControl, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Stack, Badge } from '@tokis-ui/react';
+import { Stack, Badge } from '@tokis/react';
 import { NavButton } from '../components/NavButton';
-import { ButtonLabel } from '@tokis-ui/react';
+import { ButtonLabel } from '@tokis/react';
 import { CodeBlock } from '../components/CodeBlock';
 
 interface ComparisonRow {
@@ -105,13 +105,13 @@ export function AboutPage() {
                 The package structure enforces strict separation of concerns. Tokens inform the theme.
                 The headless core is framework-free. React is one adapter on top.
               </p>
-              <CodeBlock language="text" code={`@tokis-ui/tokens    ← CSS variables as JS constants
+              <CodeBlock language="text" code={`@tokis/tokens    ← CSS variables as JS constants
     ↓
-@tokis-ui/theme     ← Precompiled component CSS
+@tokis/theme     ← Precompiled component CSS
     ↓
-@tokis-ui/core      ← Headless logic (no React)
+@tokis/core      ← Headless logic (no React)
     ↓
-@tokis-ui/react     ← React components & hooks`} />
+@tokis/react     ← React components & hooks`} />
             </div>
           </section>
 
@@ -314,11 +314,11 @@ export function AboutPage() {
               <p className="features__eyebrow">Architecture Deep Dive</p>
               <h2 className="about-section__title">The token system</h2>
               <p className="about-section__desc">
-                <code>@tokis-ui/tokens</code> exports every design decision as both a TypeScript constant
+                <code>@tokis/tokens</code> exports every design decision as both a TypeScript constant
                 and a CSS custom property. The two layers — primitive and semantic — give you a
                 theming system that's both precise and maintainable.
               </p>
-              <CodeBlock language="tsx" filename="@tokis-ui/tokens — Primitive tokens" code={`// Primitive: raw values, named by scale
+              <CodeBlock language="tsx" filename="@tokis/tokens — Primitive tokens" code={`// Primitive: raw values, named by scale
 export const colors = {
   blue50:  '#eff6ff',
   blue500: '#0066ff',
@@ -335,7 +335,7 @@ export const spacing = {
   8: '32px',
   // ...
 };`} />
-              <CodeBlock language="tsx" filename="@tokis-ui/tokens — Semantic tokens" code={`// Semantic: meaningful aliases that change per theme
+              <CodeBlock language="tsx" filename="@tokis/tokens — Semantic tokens" code={`// Semantic: meaningful aliases that change per theme
 export const semanticLight = {
   colorPrimary:    colors.blue500,
   colorBackground: '#ffffff',
@@ -349,7 +349,7 @@ export const semanticDark = {
   textPrimary:     colors.gray50,
   textSecondary:   colors.gray400,
 };`} />
-              <CodeBlock language="css" filename="@tokis-ui/theme — Output CSS (simplified)" code={`:root {
+              <CodeBlock language="css" filename="@tokis/theme — Output CSS (simplified)" code={`:root {
   --tokis-color-primary: #0066ff;
   --tokis-color-background: #ffffff;
   --tokis-text-primary: #111827;
@@ -373,7 +373,7 @@ export const semanticDark = {
                 prop explosion while keeping each part independently composable.
               </p>
               <CodeBlock language="tsx" code={`// ✅ Tokis — explicit, composable, zero prop explosion
-import { ButtonRoot, ButtonIcon, ButtonLabel } from '@tokis-ui/react';
+import { ButtonRoot, ButtonIcon, ButtonLabel } from '@tokis/react';
 
 <ButtonRoot variant="primary" size="lg" loading={isSaving}>
   <ButtonIcon aria-hidden>
@@ -404,13 +404,13 @@ import { ButtonRoot, ButtonIcon, ButtonLabel } from '@tokis-ui/react';
           <section className="about-section">
             <div className="about-section__inner">
               <p className="features__eyebrow">Headless Core</p>
-              <h2 className="about-section__title">@tokis-ui/core — framework-agnostic logic</h2>
+              <h2 className="about-section__title">@tokis/core — framework-agnostic logic</h2>
               <p className="about-section__desc">
                 Complex UI patterns like focus traps, roving tabindex, and controllable state
-                are framework-agnostic problems. <code>@tokis-ui/core</code> implements them in
+                are framework-agnostic problems. <code>@tokis/core</code> implements them in
                 plain TypeScript — no React, no Vue.
               </p>
-              <CodeBlock language="ts" filename="@tokis-ui/core/focus/focus-trap.ts" code={`// Pure TypeScript — no framework imports
+              <CodeBlock language="ts" filename="@tokis/core/focus/focus-trap.ts" code={`// Pure TypeScript — no framework imports
 export function trapFocus(container: HTMLElement): () => void {
   const focusable = container.querySelectorAll<HTMLElement>(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -433,9 +433,9 @@ export function trapFocus(container: HTMLElement): () => void {
   return () => container.removeEventListener('keydown', handleKeyDown);
 }`} />
               <p className="about-section__desc">
-                The React adapter in <code>@tokis-ui/react</code> wraps this in a <code>useEffect</code>:
+                The React adapter in <code>@tokis/react</code> wraps this in a <code>useEffect</code>:
               </p>
-              <CodeBlock language="tsx" filename="@tokis-ui/react — useDialog hook (simplified)" code={`import { trapFocus } from '@tokis-ui/core';
+              <CodeBlock language="tsx" filename="@tokis/react — useDialog hook (simplified)" code={`import { trapFocus } from '@tokis/core';
 
 export function useDialog(ref: RefObject<HTMLElement>, open: boolean) {
   useEffect(() => {

@@ -1,6 +1,6 @@
 {
-  "name": "tokis-ui-website",
-  "description": "Tokis Only Knows Its Styles — Documentation and playground website for tokis-ui",
+  "name": "tokis-website",
+  "description": "Tokis Only Knows Its Styles — Documentation and playground website for @tokis/tokis",
   "private": true,
   "version": "0.2.0",
   "type": "module",
@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tokis-ui/react": "latest",
-    "@tokis-ui/theme": "latest",
+    "@tokis/react": "latest",
+    "@tokis/theme": "latest",
+    "@tokis/core": "latest",
+    "@tokis/tokens": "latest",
     "highlight.js": "^11.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

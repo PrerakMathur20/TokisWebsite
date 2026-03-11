@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { useTheme, Tooltip } from '@tokis-ui/react';
+import { useTheme, Tooltip } from '@tokis/react';
 import { DocsSearchModal, DocsSearchButton } from './DocsSearch';
 
 const SunIcon = () => (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell, Badge, Avatar, Stack, ButtonRoot, ButtonLabel } from '@tokis-ui/react';
+import { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell, Badge, Avatar, Stack, ButtonRoot, ButtonLabel } from '@tokis/react';
 import { ComponentPreview, DemoToggle } from '../../components/ComponentPreview';
 import { PropsTable, PropDef } from '../../components/PropsTable';
 
