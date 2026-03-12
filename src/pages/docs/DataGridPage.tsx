@@ -47,7 +47,7 @@ const columns: DataGridColumn[] = [
     flex: 2,
     filterable: true,
     renderCell: ({ row }) => {
-      const u = row as User;
+      const u = row as unknown as User;
       return (
         <Stack direction="row" gap={2} align="center">
           <Avatar name={u.name} size="sm" />
