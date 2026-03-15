@@ -19,9 +19,43 @@ export function InstallationPage() {
         <div className="gs-step__num" aria-hidden="true">1</div>
         <div className="gs-step__content">
           <h2 className="gs-step__title">Install packages</h2>
-          <p style={{ margin: '0 0 var(--tokis-spacing-4)', color: 'var(--tokis-text-secondary)', fontSize: 'var(--tokis-font-size-sm)' }}>
-            Install the React adapter, default theme, and peer dependencies. Or use{' '}
-            <code className="inline-code">@tokis/tokis</code> to install everything at once.
+          <p style={{ margin: '0 0 var(--tokis-spacing-2)', color: 'var(--tokis-text-secondary)', fontSize: 'var(--tokis-font-size-sm)' }}>
+            Install everything in one shot with the meta-package:
+          </p>
+          <Tabs
+            variant="pills"
+            tabs={[
+              {
+                value: 'npm',
+                label: 'npm',
+                content: (
+                  <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
+                    <CodeBlock language="bash" code={`npm install @tokis/tokis`} />
+                  </div>
+                ),
+              },
+              {
+                value: 'pnpm',
+                label: 'pnpm',
+                content: (
+                  <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
+                    <CodeBlock language="bash" code={`pnpm add @tokis/tokis`} />
+                  </div>
+                ),
+              },
+              {
+                value: 'yarn',
+                label: 'yarn',
+                content: (
+                  <div style={{ marginTop: 'var(--tokis-spacing-3)' }}>
+                    <CodeBlock language="bash" code={`yarn add @tokis/tokis`} />
+                  </div>
+                ),
+              },
+            ]}
+          />
+          <p style={{ margin: 'var(--tokis-spacing-4) 0 var(--tokis-spacing-2)', color: 'var(--tokis-text-secondary)', fontSize: 'var(--tokis-font-size-sm)' }}>
+            Or install only what you need:
           </p>
           <Tabs
             variant="pills"

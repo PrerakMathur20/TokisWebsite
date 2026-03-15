@@ -2,9 +2,25 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ThemeProvider } from '@tokis/react';
 
+declare global {
+  interface Window {
+    goatcounter?: {
+      count: (vars?: { path?: string; title?: string; referrer?: string; event?: boolean }) => void;
+    };
+  }
+}
+
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
+function PageTracker() {
+  const { pathname, search } = useLocation();
+  useEffect(() => {
+    window.goatcounter?.count({ path: pathname + search });
+  }, [pathname, search]);
   return null;
 }
 
@@ -100,6 +116,7 @@ function App() {
     <ThemeProvider>
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <ScrollToTop />
+        <PageTracker />
         <Routes>
           {/* Landing & top-level */}
           <Route element={<LandingLayout />}>
