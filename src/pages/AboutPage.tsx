@@ -153,9 +153,9 @@ export function AboutPage() {
               <h2 className="about-section__title">What's coming</h2>
               <div className="roadmap-grid">
                 {[
-                  { phase: 'v0.1', label: 'Current', items: ['40+ React components', 'CSS variable theming', 'Dark mode', 'WCAG AA compliance'], done: true },
-                  { phase: 'v0.2', label: 'Next', items: ['Animation primitives', 'Vue adapter', 'Figma tokens sync', 'RTL support'], done: false },
-                  { phase: 'v0.3', label: 'Future', items: ['Svelte adapter', 'CLI scaffold tool', 'Theme builder UI', 'AI-assisted theming'], done: false },
+                  { phase: 'v1', label: 'Current', items: ['40+ React components', 'CSS variable theming', 'Dark mode', 'WCAG AA compliance'], done: true },
+                  { phase: 'v2', label: 'Next', items: ['Animation primitives', 'Vue adapter', 'Figma tokens sync', 'RTL support'], done: false },
+                  { phase: 'v3', label: 'Future', items: ['Svelte adapter', 'CLI scaffold tool', 'Theme builder UI', 'AI-assisted theming'], done: false },
                 ].map((phase) => (
                   <div key={phase.phase} className={`roadmap-card${phase.done ? ' roadmap-card--done' : ''}`}>
                     <div className="roadmap-card__header">
