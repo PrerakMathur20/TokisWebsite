@@ -35,6 +35,7 @@ import { GettingStartedPage } from './pages/docs/GettingStartedPage';
 import { IntroductionPage } from './pages/docs/IntroductionPage';
 import { InstallationPage } from './pages/docs/InstallationPage';
 import { ThemingPage } from './pages/docs/ThemingPage';
+import { AccessibilityPage } from './pages/docs/AccessibilityPage';
 
 // Docs — Foundations
 import { FoundationsPage } from './pages/docs/FoundationsPage';
@@ -135,6 +136,7 @@ function App() {
             <Route path="introduction" element={<IntroductionPage />} />
             <Route path="installation" element={<InstallationPage />} />
             <Route path="theming" element={<ThemingPage />} />
+            <Route path="accessibility" element={<AccessibilityPage />} />
 
             {/* Foundations */}
             <Route path="foundations" element={<FoundationsPage />} />

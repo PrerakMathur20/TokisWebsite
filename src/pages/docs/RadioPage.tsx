@@ -86,13 +86,15 @@ export function RadioPage() {
           code={`<RadioGroup name="plan" value={plan} onChange={setPlan}>
   <Stack gap={3}>
     {plans.map(({ id, name, price, desc }) => (
-      <label key={id} style={{ display: 'flex', ... }}>
+      <div key={id} style={{ display: 'flex', gap: 12, padding: 12, border: '...', cursor: 'pointer' }}
+        onClick={() => setPlan(id)}>
+        {/* Radio reads value/onChange from RadioGroup context — no props needed */}
         <Radio value={id} />
         <div>
           <strong>{name}</strong> — {price}
           <p>{desc}</p>
         </div>
-      </label>
+      </div>
     ))}
   </Stack>
 </RadioGroup>`}
@@ -120,7 +122,7 @@ export function RadioPage() {
                     }}
                     onClick={() => setPlan(id)}
                   >
-                    <Radio value={id} checked={plan === id} onChange={setPlan} />
+                    <Radio value={id} />
                     <div>
                       <div style={{ display: 'flex', gap: 8, alignItems: 'baseline' }}>
                         <strong style={{ fontSize: 'var(--tokis-font-size-sm)' }}>{name}</strong>

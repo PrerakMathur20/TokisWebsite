@@ -18,6 +18,7 @@ export const navigation: NavSection[] = [
       { label: 'Introduction', path: '/docs/introduction' },
       { label: 'Installation', path: '/docs/installation' },
       { label: 'Theming', path: '/docs/theming' },
+      { label: 'Accessibility', path: '/docs/accessibility' },
     ],
   },
   {

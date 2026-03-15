@@ -15,7 +15,8 @@ type CardVariant = 'default' | 'elevated' | 'ghost';
 
 const cardProps: PropDef[] = [
   { name: 'variant', type: "'default' | 'elevated' | 'ghost'", default: "'default'", description: 'Visual style of the card.' },
-  { name: 'clickable', type: 'boolean', default: 'false', description: 'Makes the card interactive with hover and focus styles. Adds role="button".' },
+  { name: 'clickable', type: 'boolean', default: 'false', description: 'Makes the card interactive with hover and focus styles. Adds role="button" and tabIndex={0}.' },
+  { name: 'as', type: 'React.ElementType', default: "'article' (non-clickable) | 'div' (clickable)", description: 'Override the rendered HTML element. Defaults to article for semantic grouping of card content (WCAG landmark structure). Use section, li, or div as appropriate for the surrounding context.' },
 ];
 
 export function CardPage() {
@@ -200,6 +201,22 @@ export function CardPage() {
             ))}
           </Stack>
         </ComponentPreview>
+      </div>
+
+      {/* Accessibility */}
+      <div className="doc-section">
+        <h2 className="doc-section__title">Accessibility</h2>
+        <p className="doc-section__desc">
+          Non-clickable cards render as <code className="inline-code">article</code> by default, giving
+          screen readers a meaningful landmark for self-contained content. When cards appear in a list,
+          pass <code className="inline-code">as="li"</code> and wrap the group in a <code className="inline-code">ul</code>.
+          Use <code className="inline-code">as="div"</code> when no semantic grouping is needed (e.g. a layout container).
+        </p>
+        <p className="doc-section__desc">
+          Clickable cards receive <code className="inline-code">role="button"</code> and <code className="inline-code">tabIndex={0}</code> automatically,
+          making them keyboard-accessible. Add a descriptive <code className="inline-code">aria-label</code> when the card title
+          alone doesn't convey the action (e.g. multiple "View details" cards on the same page).
+        </p>
       </div>
 
       {/* Props */}

@@ -333,6 +333,49 @@ const [value, setValue] = useState<string | undefined>('2025-03-15T14:30');
         </div>
       </div>
 
+      {/* Keyboard Navigation */}
+      <div className="doc-section">
+        <h2 className="doc-section__title">Keyboard Navigation</h2>
+        <p className="doc-section__desc">
+          When the calendar panel opens, focus moves automatically to the first focusable element
+          inside it. When the panel closes — via date selection, Escape, or outside click — focus
+          returns to the trigger button.
+        </p>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 'var(--tokis-font-size-sm)' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid var(--tokis-color-border)' }}>
+                <th style={{ textAlign: 'left', padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)', color: 'var(--tokis-text-secondary)', fontWeight: 'var(--tokis-font-weight-medium)' }}>Key</th>
+                <th style={{ textAlign: 'left', padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)', color: 'var(--tokis-text-secondary)', fontWeight: 'var(--tokis-font-weight-medium)' }}>Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Enter / Space', 'Open the calendar panel (on trigger); select the focused date (in grid)'],
+                ['Arrow keys', 'Move focus between days in the calendar grid'],
+                ['Page Up / Page Down', 'Navigate to the previous / next month'],
+                ['Ctrl + Page Up / Down', 'Navigate to the previous / next year'],
+                ['Home / End', 'Jump to the first / last day of the current week'],
+                ['Escape', 'Close the panel and return focus to the trigger'],
+                ['Tab', 'Move focus between the prev/next month buttons and the calendar grid'],
+              ].map(([key, desc]) => (
+                <tr key={key} style={{ borderBottom: '1px solid var(--tokis-color-border)' }}>
+                  <td style={{ padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)' }}>
+                    <code className="inline-code">{key}</code>
+                  </td>
+                  <td style={{ padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)', color: 'var(--tokis-text-secondary)' }}>{desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="doc-section__desc" style={{ marginTop: 'var(--tokis-spacing-4)' }}>
+          <strong>TimePicker</strong> renders native <code className="inline-code">&lt;select&gt;</code> elements
+          — keyboard interaction is handled by the browser natively (arrow keys scroll options,
+          Enter confirms selection).
+        </p>
+      </div>
+
       {/* Props */}
       <div className="doc-section">
         <h2 className="doc-section__title">Props — DatePicker</h2>

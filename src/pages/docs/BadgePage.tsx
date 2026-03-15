@@ -6,6 +6,7 @@ import { PropsTable, PropDef } from '../../components/PropsTable';
 const badgeProps: PropDef[] = [
   { name: 'variant', type: "'default' | 'primary' | 'success' | 'warning' | 'error' | 'info' | 'outline'", default: "'default'", description: 'Color variant of the badge.' },
   { name: 'dot', type: 'boolean', default: 'false', description: 'Renders as a small status dot instead of text.' },
+  { name: 'dotLabel', type: 'string', description: 'Screen reader text alternative for the dot indicator. Required for WCAG 1.1.1 compliance when dot={true} conveys status information (e.g. "Online", "Away").' },
   { name: 'children', type: 'ReactNode', description: 'Badge label text.' },
 ];
 
@@ -79,31 +80,32 @@ export function BadgePage() {
         <h2 className="doc-section__title">Dot Badges</h2>
         <p className="doc-section__desc">
           Minimal status indicators without text. Useful for real-time presence or connection state.
+          Always provide <code className="inline-code">dotLabel</code> so screen readers convey the
+          same status the dot communicates visually (WCAG 1.1.1).
         </p>
         <ComponentPreview
           code={`<Stack direction="row" gap={3} align="center">
-  <Badge dot variant="success" />
-  <Badge dot variant="warning" />
-  <Badge dot variant="error" />
-  <Badge dot variant="info" />
-  <Badge dot />
+  <Badge dot variant="success" dotLabel="Online" />
+  <Badge dot variant="warning" dotLabel="Away" />
+  <Badge dot variant="error" dotLabel="Busy" />
+  <Badge dot dotLabel="Offline" />
 </Stack>`}
         >
           <Stack direction="row" gap={3} align="center">
             <Stack gap={1} style={{ alignItems: 'center' }}>
-              <Badge dot variant="success" />
+              <Badge dot variant="success" dotLabel="Online" />
               <span style={{ fontSize: 'var(--tokis-font-size-xs)', color: 'var(--tokis-text-tertiary)' }}>Online</span>
             </Stack>
             <Stack gap={1} style={{ alignItems: 'center' }}>
-              <Badge dot variant="warning" />
+              <Badge dot variant="warning" dotLabel="Away" />
               <span style={{ fontSize: 'var(--tokis-font-size-xs)', color: 'var(--tokis-text-tertiary)' }}>Away</span>
             </Stack>
             <Stack gap={1} style={{ alignItems: 'center' }}>
-              <Badge dot variant="error" />
+              <Badge dot variant="error" dotLabel="Busy" />
               <span style={{ fontSize: 'var(--tokis-font-size-xs)', color: 'var(--tokis-text-tertiary)' }}>Busy</span>
             </Stack>
             <Stack gap={1} style={{ alignItems: 'center' }}>
-              <Badge dot />
+              <Badge dot dotLabel="Offline" />
               <span style={{ fontSize: 'var(--tokis-font-size-xs)', color: 'var(--tokis-text-tertiary)' }}>Offline</span>
             </Stack>
           </Stack>

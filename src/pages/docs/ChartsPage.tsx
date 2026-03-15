@@ -121,6 +121,52 @@ export function ChartsPage() {
         </ComponentPreview>
       </div>
 
+      {/* Keyboard Navigation */}
+      <div className="doc-section">
+        <h2 className="doc-section__title">Keyboard Navigation &amp; Accessibility</h2>
+        <p className="doc-section__desc">
+          All chart types (BarChart, LineChart, PieChart) support full keyboard navigation using a
+          roving <code className="inline-code">tabIndex</code> pattern. The first data element receives
+          initial focus; arrow keys move focus across elements. Focusing an element shows the same
+          tooltip that hover shows — ensuring keyboard and pointer users receive identical information.
+        </p>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 'var(--tokis-font-size-sm)' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid var(--tokis-color-border)' }}>
+                <th style={{ textAlign: 'left', padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)', color: 'var(--tokis-text-secondary)', fontWeight: 'var(--tokis-font-weight-medium)' }}>Key</th>
+                <th style={{ textAlign: 'left', padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)', color: 'var(--tokis-text-secondary)', fontWeight: 'var(--tokis-font-weight-medium)' }}>Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Tab', 'Enter the chart — focuses the first data element'],
+                ['ArrowRight / ArrowDown', 'Move to the next data element'],
+                ['ArrowLeft / ArrowUp', 'Move to the previous data element'],
+                ['Home', 'Jump to the first data element'],
+                ['End', 'Jump to the last data element'],
+                ['Focus', 'Show tooltip for the focused data element'],
+                ['Blur', 'Hide tooltip'],
+              ].map(([key, desc]) => (
+                <tr key={key} style={{ borderBottom: '1px solid var(--tokis-color-border)' }}>
+                  <td style={{ padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)' }}>
+                    <code className="inline-code">{key}</code>
+                  </td>
+                  <td style={{ padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)', color: 'var(--tokis-text-secondary)' }}>{desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="doc-section__desc" style={{ marginTop: 'var(--tokis-spacing-4)' }}>
+          Each data element has <code className="inline-code">role="img"</code> and an{' '}
+          <code className="inline-code">aria-label</code> of <code className="inline-code">"{`{label}: {value}`}"</code>,
+          so screen readers announce the data point directly without requiring the visual tooltip.
+          The SVG container carries a descriptive <code className="inline-code">aria-label</code>
+          and the tooltip overlay is <code className="inline-code">aria-hidden</code>.
+        </p>
+      </div>
+
       {/* Bar Chart Props */}
       <div className="doc-section">
         <h2 className="doc-section__title">Props — BarChart</h2>

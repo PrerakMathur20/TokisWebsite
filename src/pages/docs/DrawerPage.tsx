@@ -16,7 +16,7 @@ const drawerProps: PropDef[] = [
   { name: 'onClose', type: '() => void', required: true, description: 'Called when the drawer should close.' },
   { name: 'side', type: "'left' | 'right' | 'top' | 'bottom'", default: "'right'", description: 'Which edge the drawer slides in from.' },
   { name: 'title', type: 'ReactNode', description: 'Drawer heading. Connected to aria-labelledby.' },
-  { name: 'description', type: 'ReactNode', description: 'Subtitle below the title.' },
+  { name: 'description', type: 'ReactNode', description: 'Subtitle below the title. Connected to aria-describedby on the dialog element.' },
   { name: 'footer', type: 'ReactNode', description: 'Footer area, typically for action buttons.' },
   { name: 'closeOnBackdrop', type: 'boolean', default: 'true', description: 'Close when clicking the backdrop.' },
   { name: 'closeOnEsc', type: 'boolean', default: 'true', description: 'Close when pressing Escape.' },

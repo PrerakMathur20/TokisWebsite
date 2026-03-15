@@ -177,6 +177,42 @@ export function PopoverPage() {
         </ComponentPreview>
       </div>
 
+      {/* Keyboard navigation */}
+      <div className="doc-section">
+        <h2 className="doc-section__title">Keyboard Navigation</h2>
+        <p className="doc-section__desc">
+          Popovers are fully keyboard-accessible. When the popover opens, focus automatically moves
+          to the first focusable element inside the panel. When it closes — via Escape, outside click,
+          or a button inside the panel — focus returns to the trigger that opened it.
+        </p>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 'var(--tokis-font-size-sm)' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid var(--tokis-color-border)' }}>
+                <th style={{ textAlign: 'left', padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)', color: 'var(--tokis-text-secondary)', fontWeight: 'var(--tokis-font-weight-medium)' }}>Key</th>
+                <th style={{ textAlign: 'left', padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)', color: 'var(--tokis-text-secondary)', fontWeight: 'var(--tokis-font-weight-medium)' }}>Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Enter / Space', 'Open the popover when trigger is focused'],
+                ['Tab', 'Move focus through interactive elements inside the popover'],
+                ['Shift + Tab', 'Move focus backwards through interactive elements'],
+                ['Escape', 'Close the popover and return focus to the trigger'],
+                ['Click outside', 'Close the popover and return focus to the trigger'],
+              ].map(([key, desc]) => (
+                <tr key={key} style={{ borderBottom: '1px solid var(--tokis-color-border)' }}>
+                  <td style={{ padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)' }}>
+                    <code className="inline-code">{key}</code>
+                  </td>
+                  <td style={{ padding: 'var(--tokis-spacing-2) var(--tokis-spacing-3)', color: 'var(--tokis-text-secondary)' }}>{desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* Use cases */}
       <div className="doc-section">
         <h2 className="doc-section__title">When to use Popover vs Tooltip</h2>

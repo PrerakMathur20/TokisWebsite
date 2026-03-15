@@ -54,7 +54,7 @@ export function IntroductionPage() {
             },
             {
               title: 'Accessible by Default',
-              desc: 'WAI-ARIA 1.2 compliance, keyboard navigation, focus management, and screen reader support are built-in — not optional bolt-ons.',
+              desc: 'Following WAI-ARIA Authoring Practices and targeting WCAG 2.2 Level AA. Keyboard navigation, focus management, and screen reader support are built-in — not optional bolt-ons.',
               badge: 'Accessibility',
               badgeVariant: 'success' as const,
             },

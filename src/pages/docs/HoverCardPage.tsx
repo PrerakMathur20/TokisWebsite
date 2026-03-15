@@ -143,6 +143,26 @@ export function HoverCardPage() {
         </ComponentPreview>
       </div>
 
+      {/* Accessibility */}
+      <div className="doc-section">
+        <h2 className="doc-section__title">Accessibility</h2>
+        <p className="doc-section__desc">
+          The hover card panel has <code className="inline-code">role="tooltip"</code> and is wired to
+          the trigger via <code className="inline-code">aria-describedby</code>. When the card is visible,
+          screen readers announce the panel content as supplemental description of the trigger element.
+        </p>
+        <p className="doc-section__desc">
+          The card also opens on <strong>focus</strong> (keyboard navigation), not just mouse hover, so
+          keyboard users receive the same contextual information. Moving focus away from the trigger closes
+          the card.
+        </p>
+        <p className="doc-section__desc">
+          If the card content must contain interactive elements (buttons, links, forms), use a{' '}
+          <strong>Popover</strong> instead — <code className="inline-code">role="tooltip"</code> is not
+          intended for interactive content per WAI-ARIA.
+        </p>
+      </div>
+
       {/* Usage guidance */}
       <div className="doc-section">
         <h2 className="doc-section__title">Usage Guidelines</h2>
