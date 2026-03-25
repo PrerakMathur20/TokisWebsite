@@ -10,12 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tokis/tokis": "^1.2.3",
-    "@tokis/react": "^1.2.3",
-    "@tokis/theme": "^1.2.3",
-    "@tokis/core": "^1.2.3",
-    "@tokis/tokens": "^1.2.3",
-    "@tokis/icons": "^1.2.3",
+    "@tokis/tokis": "^1.3.0",
+    "@tokis/react": "^1.3.0",
+    "@tokis/theme": "^1.3.0",
+    "@tokis/core": "^1.3.0",
+    "@tokis/tokens": "^1.3.0",
+    "@tokis/icons": "^1.3.0",
     "highlight.js": "^11.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
